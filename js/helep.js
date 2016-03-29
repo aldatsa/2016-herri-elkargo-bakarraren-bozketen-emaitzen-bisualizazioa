@@ -20,7 +20,12 @@
         },
         emaitzakJSON: "json/emaitzak.json",
         topoJSON: "topoJSON/udalerriak-lapurdi-behe-nafarroa-zuberoa.json",
-        json_izena: "udalerriak-l-bn-z"
+        json_izena: "udalerriak-l-bn-z",
+        koloreak: {
+            bai: "#b50000",
+            ez: "#565656",
+            lehenetsia: "#ffffff"
+        }
     };
 
     // Maparen svg elementuaren neurriak.
@@ -91,19 +96,19 @@
                         console.log(d.properties.datuak.emaitza);
                         if (d.properties.datuak.emaitza === "bai") {
 
-                            return "#b50000";
+                            return aukerak.koloreak.bai;
 
                         // Kontrakoa bada berriz...
                         } else {
 
-                            return "#565656";
+                            return aukerak.koloreak.ez;
 
                         }
 
                     }
 
                     // Emaitzarik ez badago...
-                    return "#ffffff";
+                    return aukerak.koloreak.lehenetsia;
 
                 })
                 .attr("class", "unitatea")
