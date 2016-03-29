@@ -18,6 +18,7 @@
             },
             eskala: 32000
         },
+        emaitzakJSON: "json/emaitzak.json",
         topoJSON: "topoJSON/udalerriak-lapurdi-behe-nafarroa-zuberoa.json",
         json_izena: "udalerriak-l-bn-z"
     };
@@ -41,39 +42,68 @@
         .attr("width", width)
         .attr("height", height);
 
-    // Datu geografikoak irakurri dagokion topoJSONetik.
-    d3.json(aukerak.topoJSON, function(error, geodatuak) {
+    // HELEP emaitzen datuak irakurri dagokion JSONetik.
+    d3.json(aukerak.emaitzakJSON, function(error, emaitzak) {
 
         if (error) {
             return console.error(error);
         }
-        console.log(geodatuak);
 
-        // Mankomunitate guztiak.
-        svg.selectAll(".unitatea")
-            .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
-            .enter().append("path")
-            .attr("class", "unitatea")
-            .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
-            .attr("d", path);
+        // Datu geografikoak irakurri dagokion topoJSONetik.
+        d3.json(aukerak.topoJSON, function(error, geodatuak) {
 
-        // Kanpo-mugak (a === b)
-        svg.append("path")
-            .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena], function(a, b) { return a === b; }))
-            .attr("d", path)
-            .attr("class", "kanpo-mugak");
+            if (error) {
+                return console.error(error);
+            }
+            console.log(geodatuak);
 
-        // Unitateak aurreko planora ekarri.
-        svg.selectAll(".unitatea").each(function() {
-            var sel = d3.select(this);
-            sel.moveToFront();
+            // Emaitzak eta topoJSON-a bateratzeko ideia hemendik hartu dut, behar bada badago modu hobe bat.
+            // http://stackoverflow.com/questions/22994316/how-to-reference-csv-alongside-geojson-for-d3-rollover
+
+            // HELEPeko udalerri bakoitzeko datuak dagokion mapako elementuarekin lotu.
+            // d: Emaitzen arrayko udalerri bakoitzaren propietateak biltzen dituen objektua.
+            // i: indizea
+            emaitzak.udalerriak.forEach(function(d, i) {
+
+                // e: Datu geografikoetako udalerriaren propietateak
+                // j: indizea
+                topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features.forEach(function(e, j) {
+
+                    if (d.izena === e.properties.iz_euskal) {
+
+                        // Udalerri honetako emaitzak mapako bere elementuarekin lotu.
+                        e.properties.emaitzak = d;
+                        
+                    }
+                });
+            });
+
+            // Mankomunitate guztiak.
+            svg.selectAll(".unitatea")
+                .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
+                .enter().append("path")
+                .attr("class", "unitatea")
+                .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
+                .attr("d", path);
+
+            // Kanpo-mugak (a === b)
+            svg.append("path")
+                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena], function(a, b) { return a === b; }))
+                .attr("d", path)
+                .attr("class", "kanpo-mugak");
+
+            // Unitateak aurreko planora ekarri.
+            svg.selectAll(".unitatea").each(function() {
+                var sel = d3.select(this);
+                sel.moveToFront();
+            });
+
+            // Eskualdeen arteko mugak (a !== b)
+            svg.append("path")
+                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena], function(a, b) { return a !== b; }))
+                .attr("d", path)
+                .attr("class", "eskualde-mugak");
+
         });
-
-        // Eskualdeen arteko mugak (a !== b)
-        svg.append("path")
-            .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena], function(a, b) { return a !== b; }))
-            .attr("d", path)
-            .attr("class", "eskualde-mugak");
-
     });
 }());
