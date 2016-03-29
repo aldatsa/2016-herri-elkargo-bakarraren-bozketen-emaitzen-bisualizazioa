@@ -1,3 +1,8 @@
+a {
+    color: #e50000;
+    text-decoration: none;
+}
+
 #kontainerra {
     margin: 0 auto 0 auto;
     width: 680px;
@@ -15,7 +20,7 @@
 }
 
 .unitatea {
-    
+
 }
 
 .eskualde-mugak {
@@ -31,4 +36,24 @@
     stroke-width: 2px;
     stroke-linejoin: round;
     filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4));
+}
+
+#kredituak {
+    color: #333;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    left: 3px;
+    position: absolute;
+    top: 497px;
+    width: 250px;
+    text-align: center;
+}
+
+#kredituak #mapa-argia-logoa {
+	width: 100px;
+}
+
+#kredituak #mapa-iametza-logoa {
+	width: 100px;
+    margin-left: 15px;
 }
