@@ -13,10 +13,10 @@
         altuera: 600,
         proiekzioa: {
             erdia: {
-                lat: -1.1,
+                lat: -1.12,
                 lng: 43.2
             },
-            eskala: 32000
+            eskala: 34000
         },
         emaitzakJSON: "json/emaitzak.json",
         topoJSON: "topoJSON/udalerriak-lapurdi-behe-nafarroa-zuberoa.json",
