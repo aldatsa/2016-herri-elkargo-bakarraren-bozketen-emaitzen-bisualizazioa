@@ -71,9 +71,9 @@
 
                     if (d.izena === e.properties.iz_euskal) {
 
-                        // Udalerri honetako emaitzak mapako bere elementuarekin lotu.
-                        e.properties.emaitzak = d;
-                        
+                        // Udalerri honetako datuak mapako bere elementuarekin lotu.
+                        e.properties.datuak = d;
+
                     }
                 });
             });
@@ -82,6 +82,30 @@
             svg.selectAll(".unitatea")
                 .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
                 .enter().append("path")
+                .attr("fill", function(d) {
+
+                    // Udalerriko emaitzen arabera koloreztatuko dugu.
+                    if (d.properties.datuak) {
+
+                        // Emaitza HELEParen aldekoa bada...
+                        console.log(d.properties.datuak.emaitza);
+                        if (d.properties.datuak.emaitza === "bai") {
+
+                            return "#b50000";
+
+                        // Kontrakoa bada berriz...
+                        } else {
+
+                            return "#565656";
+
+                        }
+
+                    }
+
+                    // Emaitzarik ez badago...
+                    return "#ffffff";
+
+                })
                 .attr("class", "unitatea")
                 .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
                 .attr("d", path);
