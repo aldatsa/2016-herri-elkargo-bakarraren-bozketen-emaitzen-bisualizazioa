@@ -93,7 +93,6 @@
                     if (d.properties.datuak) {
 
                         // Emaitza HELEParen aldekoa bada...
-                        console.log(d.properties.datuak.emaitza);
                         if (d.properties.datuak.emaitza === "bai") {
 
                             return aukerak.koloreak.bai;
