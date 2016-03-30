@@ -1,9 +1,9 @@
 {
-  "name": "2016-helep",
+  "name": "2016-herri-elkargo-bakarraren-bozketen-emaitzen-bisualizazioa",
   "authors": [
     "Asier Iturralde Sarasola <asier.iturralde@gmail.com>"
   ],
-  "description": "HELEP emaitzen mapa interaktiboa",
+  "description": "2016ko Herri Elkargo bakarraren bozketen emaitzen bisualizazioa (HELEP)",
   "main": "",
   "moduleType": [],
   "license": "GNU GPLv3",
