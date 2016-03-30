@@ -18,7 +18,7 @@
             },
             eskala: 34000
         },
-        emaitzakJSON: "json/emaitzak.json",
+        emaitzakCSV: "csv/bizt-osoa-udip-2015-datuak-net.csv",
         topoJSON: "topoJSON/udalerriak-lapurdi-behe-nafarroa-zuberoa.json",
         json_izena: "udalerriak-l-bn-z",
         koloreak: {
@@ -47,9 +47,9 @@
         .attr("width", width)
         .attr("height", height);
 
-    // HELEP emaitzen datuak irakurri dagokion JSONetik.
-    d3.json(aukerak.emaitzakJSON, function(error, emaitzak) {
-
+    // HELEP emaitzen datuak irakurri dagokion CSVtik.
+    d3.csv(aukerak.emaitzakCSV, function(error, emaitzak) {
+        console.log(emaitzak);
         if (error) {
             return console.error(error);
         }
@@ -68,13 +68,13 @@
             // HELEPeko udalerri bakoitzeko datuak dagokion mapako elementuarekin lotu.
             // d: Emaitzen arrayko udalerri bakoitzaren propietateak biltzen dituen objektua.
             // i: indizea
-            emaitzak.udalerriak.forEach(function(d, i) {
+            emaitzak.forEach(function(d, i) {
 
                 // e: Datu geografikoetako udalerriaren propietateak
                 // j: indizea
                 topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features.forEach(function(e, j) {
 
-                    if (d.izena === e.properties.iz_euskal) {
+                    if (d["Lurralde kodea"] === e.properties.ud_kodea) {
 
                         // Udalerri honetako datuak mapako bere elementuarekin lotu.
                         e.properties.datuak = d;
@@ -88,9 +88,9 @@
                 .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
                 .enter().append("path")
                 .attr("fill", function(d) {
-
+                    
                     // Udalerriko emaitzen arabera koloreztatuko dugu.
-                    if (d.properties.datuak) {
+                    if (d.properties.datuak && d.properties.datuak.emaitza) {
 
                         // Emaitza HELEParen aldekoa bada...
                         if (d.properties.datuak.emaitza === "bai") {
