@@ -8,13 +8,36 @@
         });
     };
 
+    function eskalatu() {
+
+        var jatorrizko_zabalera = 680;
+        var zabalera = window.innerWidth;
+        var altuera = window.innerHeight;
+
+        var eskala = 1;
+
+        // Pantailaren zabalera maparena baino txikiagoa bada.
+        if (zabalera < jatorrizko_zabalera) {
+
+            // Eskala kalkulatu.
+            eskala = zabalera / jatorrizko_zabalera - 0.04;
+
+        }
+
+        document.getElementById("kontainerra").style["transform-origin"] = "top left";
+        document.getElementById("kontainerra").style.transform = "scale(" + eskala + ")";
+
+    }
+
+    eskalatu();
+
     var aukerak = {
-        zabalera: 800,
-        altuera: 600,
+        zabalera: 680,
+        altuera: 580,
         proiekzioa: {
             erdia: {
-                lat: -1.12,
-                lng: 43.2
+                lat: -1.22,
+                lng: 43.22
             },
             eskala: 34000
         },
