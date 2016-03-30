@@ -13,10 +13,17 @@ a {
     border: 1px solid #000;
 }
 
+.izenburua {
+    position: absolute;
+    top: 8px;
+    left: 24px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
 #mapa {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    position: absolute;
+    top: 30px;
 }
 
 .unitatea {
@@ -41,7 +48,7 @@ a {
 .legenda {
     right: 10px;
     position: absolute;
-    top: 12px;
+    top: 60px;
     font-size: 24px;
 }
 
