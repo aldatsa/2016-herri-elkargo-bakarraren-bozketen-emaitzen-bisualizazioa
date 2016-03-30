@@ -143,7 +143,6 @@
                 .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
                 .attr("d", path)
                 .on("mouseover", function(d) {
-                    console.log(d.properties.datuak.biztanleria2015);
 
                     tip.html(function(d) {
 
@@ -153,6 +152,11 @@
 
                     tip.show(d);
 
+                })
+                .on("mouseout", function(d) {
+
+                    tip.hide();
+                    
                 })
                 .call(tip);
 
