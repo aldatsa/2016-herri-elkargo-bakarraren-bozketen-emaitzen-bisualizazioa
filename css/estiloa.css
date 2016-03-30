@@ -38,6 +38,26 @@ a {
     filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4));
 }
 
+.legenda {
+    right: 10px;
+    position: absolute;
+    top: 12px;
+    font-size: 24px;
+}
+
+.legenda .kolorea {
+    display: inline-block;
+    height: 15px;
+    margin: 0px 5px 0px 15px;
+    width: 15px;
+}
+
+.legenda .kolorea.erabakitzeke {
+    border: 1px solid #ccc;
+    height: 14px;
+    width: 14px;
+}
+
 #kredituak {
     color: #333;
     font-family: Arial,Helvetica,sans-serif;
