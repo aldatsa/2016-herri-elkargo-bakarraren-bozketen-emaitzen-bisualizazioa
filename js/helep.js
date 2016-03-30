@@ -74,7 +74,7 @@
                 // j: indizea
                 topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features.forEach(function(e, j) {
 
-                    if (d["Lurralde kodea"] === e.properties.ud_kodea) {
+                    if (d.lurralde_kodea === e.properties.ud_kodea) {
 
                         // Udalerri honetako datuak mapako bere elementuarekin lotu.
                         e.properties.datuak = d;
@@ -88,7 +88,7 @@
                 .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
                 .enter().append("path")
                 .attr("fill", function(d) {
-                    
+
                     // Udalerriko emaitzen arabera koloreztatuko dugu.
                     if (d.properties.datuak && d.properties.datuak.emaitza) {
 
@@ -112,7 +112,10 @@
                 })
                 .attr("class", "unitatea")
                 .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
-                .attr("d", path);
+                .attr("d", path)
+                .on("mouseover", function(d) {
+                    console.log(d.properties.datuak.biztanleria);
+                });
 
             // Kanpo-mugak (a === b)
             svg.append("path")
