@@ -153,7 +153,8 @@
 
                     tip.show(d);
 
-                });
+                })
+                .call(tip);
 
             // Kanpo-mugak (a === b)
             svg.append("path")
