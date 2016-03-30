@@ -37,7 +37,7 @@
         proiekzioa: {
             erdia: {
                 lat: -1.22,
-                lng: 43.22
+                lng: 43.25
             },
             eskala: 34000
         },
@@ -69,6 +69,12 @@
     var svg = d3.select("#mapa svg")
         .attr("width", width)
         .attr("height", height);
+
+    var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .html("")
+        .direction('s')
+        .offset([0, 0]);
 
     // HELEP emaitzen datuak irakurri dagokion CSVtik.
     d3.csv(aukerak.emaitzakCSV, function(error, emaitzak) {
@@ -137,7 +143,16 @@
                 .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
                 .attr("d", path)
                 .on("mouseover", function(d) {
-                    console.log(d.properties.datuak.biztanleria);
+                    console.log(d.properties.datuak.biztanleria2015);
+
+                    tip.html(function(d) {
+
+                        return "<div>" + d.properties.datuak.biztanleria2015 + "</div>";
+
+                    });
+
+                    tip.show(d);
+
                 });
 
             // Kanpo-mugak (a === b)

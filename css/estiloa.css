@@ -22,8 +22,9 @@ a {
 }
 
 #mapa {
-    position: absolute;
-    top: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .unitatea {
