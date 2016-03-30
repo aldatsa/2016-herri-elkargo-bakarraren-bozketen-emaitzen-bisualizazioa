@@ -146,7 +146,18 @@
 
                     tip.html(function(d) {
 
-                        return "<div>" + d.properties.datuak.biztanleria2015 + "</div>";
+                        var katea = "<div><strong>" + d.properties.datuak.euskarazko_izena + "</strong></div>" +
+                                    "<div>Biztanleak: " + d.properties.datuak.biztanleria2015 + "</div>";
+
+                        if (d.properties.datuak.emaitza === "bai") {
+                            katea = katea + "<div>Emaitza: ALDE</div>";
+                        } else if (d.properties.datuak.emaitza === "ez") {
+                            katea = katea + "<div>Emaitza: KONTRA</div>";
+                        } else {
+                            katea = katea + "<div>Emaitza: ERABAKITZEKE</div>";
+                        }
+
+                        return katea;
 
                     });
 
@@ -156,7 +167,7 @@
                 .on("mouseout", function(d) {
 
                     tip.hide();
-                    
+
                 })
                 .call(tip);
 
