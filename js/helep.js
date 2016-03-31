@@ -76,17 +76,18 @@
         .direction('s')
         .offset([0, 0]);
 
-    var erabakiak = {
-        herriak: {
-            alde: 0,
-            aurka: 0,
-            erabakitzeke: 0
-        },
-        biztanleak: {
-            alde: 0,
-            aurka: 0,
-            erabakitzeke: 0
-        }
+    var herriak = {
+        alde: 0,
+        aurka: 0,
+        erabakitzeke: 0,
+        guztira: 0
+    };
+
+    var biztanleak = {
+        alde: 0,
+        aurka: 0,
+        erabakitzeke: 0,
+        guztira: 0
     };
 
     // HELEP emaitzen datuak irakurri dagokion CSVtik.
@@ -116,33 +117,37 @@
                 // j: indizea
                 topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features.forEach(function(e, j) {
 
+                    var biztanleria2015 = 0;
+
                     if (d.lurralde_kodea === e.properties.ud_kodea) {
+
+                        biztanleria2015 = parseInt(d.biztanleria2015.replace(/\./g, ''), 10);
 
                         // Udalerri honetako datuak mapako bere elementuarekin lotu.
                         e.properties.datuak = d;
 
                         if (d.emaitza === "bai") {
 
-                            erabakiak.herriak.alde++;
-                            erabakiak.biztanleak.alde = erabakiak.biztanleak.alde + parseInt(d.biztanleria2015.replace(/\./g, ''), 10);
+                            herriak.alde++;
+                            biztanleak.alde = biztanleak.alde + biztanleria2015;
 
                         } else if (d.emaitza === "ez") {
 
-                            erabakiak.herriak.aurka++;
-                            erabakiak.biztanleak.aurka = erabakiak.biztanleak.aurka + parseInt(d.biztanleria2015.replace(/\./g, ''), 10);
+                            herriak.aurka++;
+                            biztanleak.aurka = biztanleak.aurka + biztanleria2015;
 
                         } else {
 
-                            erabakiak.herriak.erabakitzeke++;
-                            erabakiak.biztanleak.erabakitzeke = erabakiak.biztanleak.erabakitzeke + parseInt(d.biztanleria2015.replace(/\./g, ''), 10);
+                            herriak.erabakitzeke++;
+                            biztanleak.erabakitzeke = biztanleak.erabakitzeke + biztanleria2015;
 
                         }
 
+                        biztanleak.guztira = biztanleak.guztira + biztanleria2015;
+                        herriak.guztira++;
                     }
                 });
             });
-
-            console.log(erabakiak);
 
             // Mankomunitate guztiak.
             svg.selectAll(".unitatea")
@@ -231,6 +236,60 @@
                 .attr("d", path)
                 .attr("class", "eskualde-mugak");
 
+            console.log(biztanleak);
+            var chart = c3.generate({
+                bindto: "#biztanleria-grafikoa",
+                size: {
+                    height: 300,
+                    width: 200
+                },
+                legend: {
+                    hide: true
+                },
+                transition: {
+                    duration: 0
+                },
+                data: {
+                    columns: [
+                        ["Alde", biztanleak.alde],
+                        ["Aurka", biztanleak.aurka]
+                    ],
+                    type: "bar",
+                    colors: {
+                        "Alde": "#b50000",
+                        "Aurka": "#565656"
+                    },
+                    labels: true
+                },
+                axis: {
+                    x: {
+                        show: false
+                    },
+                    y: {
+                        max: biztanleak.guztira,
+                        show: false
+                    }
+                },
+                grid: {
+                    y: {
+                        lines: [
+                            {value: biztanleak.guztira / 2, text: "Biztanleen erdiak: " + (biztanleak.guztira / 2), axis: "y", position: "start"},
+                        ]
+                    }
+                },
+                tooltip: {
+                    format: {
+                        title: function(d) {
+                            return "Biztanleak";
+                        }
+                    }
+                },
+                bar: {
+                    width: {
+                        ratio: 0.5
+                    }
+                }
+            });
         });
     });
 }());
