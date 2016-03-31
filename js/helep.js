@@ -236,8 +236,7 @@
                 .attr("d", path)
                 .attr("class", "eskualde-mugak");
 
-            console.log(biztanleak);
-            var chart = c3.generate({
+            var biztanleen_grafikoa = c3.generate({
                 bindto: "#biztanleria-grafikoa",
                 size: {
                     height: 300,
@@ -247,7 +246,7 @@
                     hide: true
                 },
                 transition: {
-                    duration: 0
+                    duration: 1000
                 },
                 data: {
                     columns: [
@@ -273,7 +272,7 @@
                 grid: {
                     y: {
                         lines: [
-                            {value: biztanleak.guztira / 2, text: "Biztanleen erdiak: " + (biztanleak.guztira / 2), axis: "y", position: "start"},
+                            {value: Math.round(biztanleak.guztira / 2), text: "Biztanleen erdiak: " + Math.round(biztanleak.guztira / 2), axis: "y", position: "start"},
                         ]
                     }
                 },
@@ -281,6 +280,60 @@
                     format: {
                         title: function(d) {
                             return "Biztanleak";
+                        }
+                    }
+                },
+                bar: {
+                    width: {
+                        ratio: 0.5
+                    }
+                }
+            });
+
+            var herrien_grafikoa = c3.generate({
+                bindto: "#herriak-grafikoa",
+                size: {
+                    height: 300,
+                    width: 200
+                },
+                legend: {
+                    hide: true
+                },
+                transition: {
+                    duration: 1000
+                },
+                data: {
+                    columns: [
+                        ["Alde", herriak.alde],
+                        ["Aurka", herriak.aurka]
+                    ],
+                    type: "bar",
+                    colors: {
+                        "Alde": "#b50000",
+                        "Aurka": "#565656"
+                    },
+                    labels: true
+                },
+                axis: {
+                    x: {
+                        show: false
+                    },
+                    y: {
+                        max: herriak.guztira,
+                        show: false
+                    }
+                },
+                grid: {
+                    y: {
+                        lines: [
+                            {value: Math.round(herriak.guztira / 2), text: "Herrien erdiak: " + Math.round(herriak.guztira / 2), axis: "y", position: "start"},
+                        ]
+                    }
+                },
+                tooltip: {
+                    format: {
+                        title: function(d) {
+                            return "Herriak";
                         }
                     }
                 },
