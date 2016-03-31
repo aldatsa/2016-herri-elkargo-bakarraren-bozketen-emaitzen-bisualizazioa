@@ -76,6 +76,19 @@
         .direction('s')
         .offset([0, 0]);
 
+    var erabakiak = {
+        herriak: {
+            alde: 0,
+            aurka: 0,
+            erabakitzeke: 0
+        },
+        biztanleak: {
+            alde: 0,
+            aurka: 0,
+            erabakitzeke: 0
+        }
+    };
+
     // HELEP emaitzen datuak irakurri dagokion CSVtik.
     d3.csv(aukerak.emaitzakCSV, function(error, emaitzak) {
         console.log(emaitzak);
@@ -108,9 +121,28 @@
                         // Udalerri honetako datuak mapako bere elementuarekin lotu.
                         e.properties.datuak = d;
 
+                        if (d.emaitza === "bai") {
+
+                            erabakiak.herriak.alde++;
+                            erabakiak.biztanleak.alde = erabakiak.biztanleak.alde + parseInt(d.biztanleria2015.replace(/\./g, ''), 10);
+
+                        } else if (d.emaitza === "ez") {
+
+                            erabakiak.herriak.aurka++;
+                            erabakiak.biztanleak.aurka = erabakiak.biztanleak.aurka + parseInt(d.biztanleria2015.replace(/\./g, ''), 10);
+
+                        } else {
+
+                            erabakiak.herriak.erabakitzeke++;
+                            erabakiak.biztanleak.erabakitzeke = erabakiak.biztanleak.erabakitzeke + parseInt(d.biztanleria2015.replace(/\./g, ''), 10);
+
+                        }
+
                     }
                 });
             });
+
+            console.log(erabakiak);
 
             // Mankomunitate guztiak.
             svg.selectAll(".unitatea")
