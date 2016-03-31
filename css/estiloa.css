@@ -7,7 +7,7 @@ a {
     margin: 0 auto 0 auto;
     width: 680px;
     position: relative;
-    height: 850px;
+    height: 945px;
     font-family: Arial,Helvetica,sans-serif !important;
     font-size: 16px;
     border: 1px solid #000;
@@ -21,10 +21,17 @@ a {
     font-weight: bold;
 }
 
+.azalpena {
+    width: 80%;
+    text-align: center;
+    margin: 50px auto 0px;
+    color: #565656;
+}
+
 #grafikoak {
     text-align: center;
     position: absolute;
-    top: 0px;
+    top: 50px;
     width: 100%;
 }
 
@@ -61,7 +68,7 @@ a {
 .legenda {
     right: 10px;
     position: absolute;
-    top: 325px;
+    top: 415px;
     font-size: 24px;
 }
 
@@ -84,7 +91,7 @@ a {
     font-size: 11px;
     left: 3px;
     position: absolute;
-    top: 755px;
+    top: 845px;
     width: 250px;
     text-align: center;
 }
