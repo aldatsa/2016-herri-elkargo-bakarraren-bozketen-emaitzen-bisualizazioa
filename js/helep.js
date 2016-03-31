@@ -33,11 +33,11 @@
 
     var aukerak = {
         zabalera: 680,
-        altuera: 580,
+        altuera: 900,
         proiekzioa: {
             erdia: {
                 lat: -1.22,
-                lng: 43.25
+                lng: 43.40
             },
             eskala: 34000
         },
