@@ -10,21 +10,18 @@ a {
     height: 945px;
     font-family: Arial,Helvetica,sans-serif !important;
     font-size: 16px;
-    border: 1px solid #000;
 }
 
 .izenburua {
-    position: absolute;
-    top: 8px;
-    left: 24px;
     font-size: 24px;
     font-weight: bold;
+    text-align: center;
 }
 
 .azalpena {
     width: 80%;
     text-align: center;
-    margin: 50px auto 0px;
+    margin: 15px auto 0px;
     color: #565656;
 }
 
