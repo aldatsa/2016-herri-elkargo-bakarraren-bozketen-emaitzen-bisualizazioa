@@ -39,7 +39,7 @@
                 lat: -1.22,
                 lng: 43.40
             },
-            eskala: 34000
+            eskala: 32000
         },
         emaitzakCSV: "csv/bizt-osoa-udip-2015-datuak-net.csv",
         topoJSON: "topoJSON/udalerriak-lapurdi-behe-nafarroa-zuberoa.json",
