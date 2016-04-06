@@ -27,9 +27,11 @@
         document.getElementById("kontainerra").style["transform-origin"] = "top left";
         document.getElementById("kontainerra").style.transform = "scale(" + eskala + ")";
 
+        return eskala;
+
     }
 
-    eskalatu();
+    var eskala = eskalatu();
 
     var aukerak = {
         zabalera: 680,
@@ -72,6 +74,7 @@
 
     var tip = d3.tip()
         .attr('class', 'd3-tip')
+        .scale(eskala)
         .html("")
         .direction('s')
         .offset([0, 0]);
