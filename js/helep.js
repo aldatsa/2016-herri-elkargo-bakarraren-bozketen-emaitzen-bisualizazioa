@@ -161,8 +161,12 @@
                     // Udalerriko emaitzen arabera koloreztatuko dugu.
                     if (d.properties.datuak && d.properties.datuak.emaitza) {
 
+                        if (d.properties.datuak.emaitza === "ez-dago-deitua")  {
+
+                            return "url('#pattern-stripe')";
+
                         // Emaitza HELEParen aldekoa bada...
-                        if (d.properties.datuak.emaitza === "bai") {
+                        } else if (d.properties.datuak.emaitza === "bai") {
 
                             return aukerak.koloreak.bai;
 
@@ -203,6 +207,8 @@
                             katea = katea + "<div>Emaitza: ALDE</div>";
                         } else if (d.properties.datuak.emaitza === "ez") {
                             katea = katea + "<div>Emaitza: KONTRA</div>";
+                        } else if (d.properties.datuak.emaitza === "ez-dago-deitua") {
+                            katea = katea + "<div>EZ DAGO BOZKETARA DEITUA</div>"
                         } else {
                             katea = katea + "<div>Emaitza: ERABAKITZEKE</div>";
                         }
