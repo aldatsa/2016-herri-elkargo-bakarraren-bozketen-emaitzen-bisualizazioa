@@ -11,7 +11,7 @@ gulp.task('serve', function() {
         }
     });
 
-    gulp.watch(['index.html', 'css/**/*.css', 'js/**/*.js'], {cwd: './'}, reload);
+    gulp.watch(['index.html', 'css/**/*.css', 'js/**/*.js', 'csv/*.csv'], {cwd: './'}, reload);
 });
 
 gulp.task('default', function() {
