@@ -129,25 +129,30 @@
                         // Udalerri honetako datuak mapako bere elementuarekin lotu.
                         e.properties.datuak = d;
 
-                        if (d.emaitza === "bai") {
+                        if (e.properties.datuak.emaitza !== "ez-dago-deitua") {
 
-                            herriak.alde++;
-                            biztanleak.alde = biztanleak.alde + biztanleria2015;
+                            if (d.emaitza === "bai") {
 
-                        } else if (d.emaitza === "ez") {
+                                herriak.alde++;
+                                biztanleak.alde = biztanleak.alde + biztanleria2015;
 
-                            herriak.aurka++;
-                            biztanleak.aurka = biztanleak.aurka + biztanleria2015;
+                            } else if (d.emaitza === "ez") {
 
-                        } else {
+                                herriak.aurka++;
+                                biztanleak.aurka = biztanleak.aurka + biztanleria2015;
 
-                            herriak.erabakitzeke++;
-                            biztanleak.erabakitzeke = biztanleak.erabakitzeke + biztanleria2015;
+                            } else {
+
+                                herriak.erabakitzeke++;
+                                biztanleak.erabakitzeke = biztanleak.erabakitzeke + biztanleria2015;
+
+                            }
+
+                            biztanleak.guztira = biztanleak.guztira + biztanleria2015;
+
+                            herriak.guztira++;
 
                         }
-
-                        biztanleak.guztira = biztanleak.guztira + biztanleria2015;
-                        herriak.guztira++;
                     }
                 });
             });
