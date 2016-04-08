@@ -272,7 +272,16 @@
                         "Alde": "#b50000",
                         "Aurka": "#565656"
                     },
-                    labels: true
+                    labels: {
+                        format: {
+                            "Alde": function(v, id, i, j) {
+                                return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                            },
+                            "Aurka": function(v, id, i, j) {
+                                return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                            }
+                        }
+                    }
                 },
                 axis: {
                     x: {
@@ -286,7 +295,7 @@
                 grid: {
                     y: {
                         lines: [
-                            {value: Math.round(biztanleak.guztira / 2), text: "Biztanleen erdiak: " + Math.round(biztanleak.guztira / 2), axis: "y", position: "start"},
+                            {value: Math.round(biztanleak.guztira / 2), text: "Biztanleen erdiak: " + Math.round(biztanleak.guztira / 2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."), axis: "y", position: "start"},
                         ]
                     }
                 },
