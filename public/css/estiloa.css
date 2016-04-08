@@ -63,10 +63,11 @@ a {
 }
 
 .legenda {
-    right: 10px;
+    left: 480px;
     position: absolute;
-    top: 415px;
-    font-size: 24px;
+    top: 385px;
+    font-size: 18px;
+    width: 216px;
 }
 
 .legenda .kolorea {
@@ -81,7 +82,15 @@ a {
     height: 14px;
     width: 14px;
 }
-
+.legenda .kolorea.ez-dago-bozketara-deitua {
+    border: 1px solid #ccc;
+    height: 15px;
+    width: 15px;
+    vertical-align: initial;
+}
+.legenda .kolorea.ez-dago-bozketara-deitua img {
+    vertical-align: super;
+}
 #kredituak {
     color: #333;
     font-family: Arial,Helvetica,sans-serif;
@@ -100,4 +109,11 @@ a {
 #kredituak #mapa-iametza-logoa {
 	width: 100px;
     margin-left: 15px;
+}
+#oharrak {
+    position: absolute;
+    top: 880px;
+    left: 360px;
+    font-size: 14px;
+    color: rgb(51, 51, 51);
 }
