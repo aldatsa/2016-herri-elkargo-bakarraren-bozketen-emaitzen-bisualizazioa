@@ -34,14 +34,27 @@
     var eskala = eskalatu();
 
     var aukerak = {
-        zabalera: 680,
-        altuera: 865,
-        proiekzioa: {
-            erdia: {
-                lat: -1.22,
-                lng: 43.40
-            },
-            eskala: 32000
+        kolore_mapa: {
+            zabalera: 680,
+            altuera: 865,
+            proiekzioa: {
+                erdia: {
+                    lat: -1.22,
+                    lng: 43.40
+                },
+                eskala: 32000
+            }
+        },
+        sinbolo_proportzionalen_mapa: {
+            zabalera: 680,
+            altuera: 500,
+            proiekzioa: {
+                erdia: {
+                    lat: -1.22,
+                    lng: 43.25
+                },
+                eskala: 32000
+            }
         },
         emaitzakCSV: "csv/bizt-osoa-udip-2015-datuak-net.csv",
         topoJSON: "topoJSON/udalerriak-lapurdi-behe-nafarroa-zuberoa.json",
@@ -53,29 +66,35 @@
         }
     };
 
-    // Maparen svg elementuaren neurriak.
-    var width = aukerak.zabalera,
-        height = aukerak.altuera;
+    // Kolore-maparen proiekzioaren xehetasunak.
+    var kolore_maparen_proiektzioa = d3.geo.mercator()
+        .center([aukerak.kolore_mapa.proiekzioa.erdia.lat, aukerak.kolore_mapa.proiekzioa.erdia.lng])
+        .scale(aukerak.kolore_mapa.proiekzioa.eskala)
+        .translate([aukerak.kolore_mapa.zabalera / 2, aukerak.kolore_mapa.altuera / 2]);
 
-    // Maparen proiekzioaren xehetasunak.
-    var projection = d3.geo.mercator()
-        .center([aukerak.proiekzioa.erdia.lat, aukerak.proiekzioa.erdia.lng])
-        .scale(aukerak.proiekzioa.eskala)
-        .translate([width / 2, height / 2]);
+    // Sinbolo proportzionalen maparen proiekzioaren xehetasunak.
+    var sinbolo_proportzionalen_maparen_proiektzioa = d3.geo.mercator()
+        .center([aukerak.sinbolo_proportzionalen_mapa.proiekzioa.erdia.lat, aukerak.sinbolo_proportzionalen_mapa.proiekzioa.erdia.lng])
+        .scale(aukerak.sinbolo_proportzionalen_mapa.proiekzioa.eskala)
+        .translate([aukerak.sinbolo_proportzionalen_mapa.zabalera / 2, aukerak.sinbolo_proportzionalen_mapa.altuera / 2]);
 
-    // Maparen bidearen generatzailea.
-    var path = d3.geo.path()
-        .projection(projection);
+    // Kolore-maparen bidearen generatzailea.
+    var kolore_maparen_bidea = d3.geo.path()
+        .projection(kolore_maparen_proiektzioa);
+
+    // Sinbolo proportzionalen maparen bidearen generatzailea.
+    var sinbolo_proportzionalen_maparen_bidea = d3.geo.path()
+        .projection(sinbolo_proportzionalen_maparen_proiektzioa);
 
     // Maparen svg elementua eskuratu eta neurriak ezarri.
     var svg = d3.select("#mapa svg")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", aukerak.kolore_mapa.zabalera)
+        .attr("height", aukerak.kolore_mapa.altuera);
 
     // Sinbolo proportzionalen maparen svg elementua eskuratu eta neurriak ezarri.
     var sinbolo_proportzionalen_svg = d3.select("#sinbolo-proportzionalen-mapa svg")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", aukerak.sinbolo_proportzionalen_mapa.zabalera)
+        .attr("height", aukerak.sinbolo_proportzionalen_mapa.altuera);
 
     var tip = d3.tip()
         .attr('class', 'd3-tip')
@@ -195,7 +214,7 @@
                 })
                 .attr("class", "unitatea")
                 .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
-                .attr("d", path)
+                .attr("d", kolore_maparen_bidea)
                 .on("mouseover", function(d) {
 
                     if (["Hendaia", "Biriatu", "Urruña", "Ziburu", "Azkaine", "Getaria"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
@@ -240,7 +259,7 @@
             // Kanpo-mugak (a === b)
             svg.append("path")
                 .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena], function(a, b) { return a === b; }))
-                .attr("d", path)
+                .attr("d", kolore_maparen_bidea)
                 .attr("class", "kanpo-mugak");
 
             // Unitateak aurreko planora ekarri.
@@ -252,7 +271,7 @@
             // Eskualdeen arteko mugak (a !== b)
             svg.append("path")
                 .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena], function(a, b) { return a !== b; }))
-                .attr("d", path)
+                .attr("d", kolore_maparen_bidea)
                 .attr("class", "eskualde-mugak");
 
             // Udal guztiak.
@@ -278,12 +297,12 @@
                 })
                 .attr("class", "unitatea")
                 .attr("id", function(d) { return "sinbolo-proportzionalen-unitatea-" + d.properties.ud_kodea; })
-                .attr("d", path);
+                .attr("d", sinbolo_proportzionalen_maparen_bidea);
 
             // Kanpo-mugak (a === b)
             sinbolo_proportzionalen_svg.append("path")
                 .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena], function(a, b) { return a === b; }))
-                .attr("d", path)
+                .attr("d", sinbolo_proportzionalen_maparen_bidea)
                 .attr("class", "kanpo-mugak");
 
             // Unitateak aurreko planora ekarri.
@@ -295,7 +314,7 @@
             // Eskualdeen arteko mugak (a !== b)
             sinbolo_proportzionalen_svg.append("path")
                 .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena], function(a, b) { return a !== b; }))
-                .attr("d", path)
+                .attr("d", sinbolo_proportzionalen_maparen_bidea)
                 .attr("class", "eskualde-mugak");
 
             var radius = d3.scale.sqrt()
@@ -314,7 +333,7 @@
                 .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
                 .enter().append("circle")
                 .attr("transform", function(d) {
-                    return "translate(" + path.centroid(d) + ")";
+                    return "translate(" + sinbolo_proportzionalen_maparen_bidea.centroid(d) + ")";
                 })
                 .attr("r", function(d) {
 
