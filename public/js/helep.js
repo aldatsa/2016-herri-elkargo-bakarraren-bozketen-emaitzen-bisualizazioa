@@ -317,7 +317,13 @@
                     return "translate(" + path.centroid(d) + ")";
                 })
                 .attr("r", function(d) {
-                    return radius(parseInt(d.properties.datuak.biztanleria2015.replace(/\./g, ''), 10));
+
+                    // Bozkatu duten udalerriek bakarrik izango dute zirkulua.
+                    if (d.properties.datuak && d.properties.datuak.emaitza) {
+
+                        return radius(parseInt(d.properties.datuak.biztanleria2015.replace(/\./g, ''), 10));
+
+                    }
                 })
                 .attr("fill", function(d) {
 
