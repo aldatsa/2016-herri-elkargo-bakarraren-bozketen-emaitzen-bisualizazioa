@@ -218,7 +218,7 @@
                         } else if (d.properties.datuak.emaitza === "ez") {
                             katea = katea + "<div>Emaitza: KONTRA</div>";
                         } else if (d.properties.datuak.emaitza === "ez-dago-deitua") {
-                            katea = katea + "<div>EZ DAGO BOZKETARA DEITUA</div>"
+                            katea = katea + "<div>EZ DAGO BOZKETARA DEITUA</div>";
                         } else {
                             katea = katea + "<div>Emaitza: ERABAKITZEKE</div>";
                         }
@@ -298,6 +298,50 @@
                 .attr("d", path)
                 .attr("class", "eskualde-mugak");
 
+            var radius = d3.scale.sqrt()
+                .domain([0,
+                        d3.max(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features,
+                               function(d) {
+                                   return parseInt(d.properties.datuak.biztanleria2015.replace(/\./g, ''), 10);
+                               }
+                        )
+                ])
+                .range([0, 25]);
+
+            sinbolo_proportzionalen_svg.append("g")
+                .attr("class", "bubble")
+                .selectAll("circle")
+                .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
+                .enter().append("circle")
+                .attr("transform", function(d) {
+                    return "translate(" + path.centroid(d) + ")";
+                })
+                .attr("r", function(d) {
+                    return radius(parseInt(d.properties.datuak.biztanleria2015.replace(/\./g, ''), 10));
+                })
+                .attr("fill", function(d) {
+
+                    if (d.properties.datuak) {
+
+                        // Emaitza HELEParen aldekoa bada...
+                        if (d.properties.datuak.emaitza === "bai") {
+
+                            return aukerak.koloreak.bai;
+
+                        // Kontrakoa bada berriz...
+                        } else {
+
+                            return aukerak.koloreak.ez;
+
+                        }
+
+                    }
+
+                    // Daturik ez badago...
+                    return "#ffffff";
+
+                });
+
             var biztanleen_grafikoa = c3.generate({
                 bindto: "#biztanleria-grafikoa",
                 size: {
@@ -323,10 +367,10 @@
                     labels: {
                         format: {
                             "Alde": function(v, id, i, j) {
-                                return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                                return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                             },
                             "Aurka": function(v, id, i, j) {
-                                return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                                return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                             }
                         }
                     }
