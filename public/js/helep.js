@@ -338,7 +338,7 @@
                 .attr("r", function(d) {
 
                     // Bozkatu duten udalerriek bakarrik izango dute zirkulua.
-                    if (d.properties.datuak && d.properties.datuak.emaitza) {
+                    if (d.properties.datuak && d.properties.datuak.emaitza && d.properties.datuak.emaitza !== "ez-dago-deitua") {
 
                         return radius(parseInt(d.properties.datuak.biztanleria2015.replace(/\./g, ''), 10));
 
