@@ -72,6 +72,11 @@
         .attr("width", width)
         .attr("height", height);
 
+    // Sinbolo proportzionalen maparen svg elementua eskuratu eta neurriak ezarri.
+    var sinbolo_proportzionalen_svg = d3.select("#sinbolo-proportzionalen-mapa svg")
+        .attr("width", width)
+        .attr("height", height);
+
     var tip = d3.tip()
         .attr('class', 'd3-tip')
         .scale(eskala)
@@ -157,7 +162,7 @@
                 });
             });
 
-            // Mankomunitate guztiak.
+            // Udal guztiak.
             svg.selectAll(".unitatea")
                 .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
                 .enter().append("path")
@@ -246,6 +251,49 @@
 
             // Eskualdeen arteko mugak (a !== b)
             svg.append("path")
+                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena], function(a, b) { return a !== b; }))
+                .attr("d", path)
+                .attr("class", "eskualde-mugak");
+
+            // Udal guztiak.
+            sinbolo_proportzionalen_svg.selectAll(".unitatea")
+                .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
+                .enter().append("path")
+                .attr("fill", function(d) {
+
+                    // Udalerriko emaitzen arabera koloreztatuko dugu.
+                    if (d.properties.datuak && d.properties.datuak.emaitza) {
+
+                        if (d.properties.datuak.emaitza === "ez-dago-deitua")  {
+
+                            return "url('#pattern-stripe')";
+
+                        }
+
+                    }
+
+                    // Emaitzarik ez badago...
+                    return aukerak.koloreak.lehenetsia;
+
+                })
+                .attr("class", "unitatea")
+                .attr("id", function(d) { return "sinbolo-proportzionalen-unitatea-" + d.properties.ud_kodea; })
+                .attr("d", path);
+
+            // Kanpo-mugak (a === b)
+            sinbolo_proportzionalen_svg.append("path")
+                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena], function(a, b) { return a === b; }))
+                .attr("d", path)
+                .attr("class", "kanpo-mugak");
+
+            // Unitateak aurreko planora ekarri.
+            sinbolo_proportzionalen_svg.selectAll(".unitatea").each(function() {
+                var sel = d3.select(this);
+                sel.moveToFront();
+            });
+
+            // Eskualdeen arteko mugak (a !== b)
+            sinbolo_proportzionalen_svg.append("path")
                 .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena], function(a, b) { return a !== b; }))
                 .attr("d", path)
                 .attr("class", "eskualde-mugak");
