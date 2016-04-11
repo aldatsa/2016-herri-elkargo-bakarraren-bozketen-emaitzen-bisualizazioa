@@ -92,35 +92,47 @@ body {
     width: 160px;
 }
 
+.sinbolo-proportzionalen-maparen-legenda {
+    position: absolute;
+    top: 970px;
+    left: 480px;
+}
+
 .legenda {
     left: 480px;
     position: absolute;
     top: 385px;
+}
+
+.legenda, .sinbolo-proportzionalen-maparen-legenda {
     font-size: 18px;
     width: 216px;
 }
 
-.legenda .kolorea {
+.legenda .kolorea, .sinbolo-proportzionalen-maparen-legenda .kolorea {
     display: inline-block;
     height: 15px;
     margin: 0px 5px 0px 15px;
     width: 15px;
 }
 
-.legenda .kolorea.erabakitzeke {
+.legenda .kolorea.erabakitzeke, .sinbolo-proportzionalen-maparen-legenda .kolorea.erabakitzeke {
     border: 1px solid #ccc;
     height: 14px;
     width: 14px;
 }
-.legenda .kolorea.ez-dago-bozketara-deitua {
+
+.legenda .kolorea.ez-dago-bozketara-deitua, .sinbolo-proportzionalen-maparen-legenda .kolorea.ez-dago-bozketara-deitua {
     border: 1px solid #ccc;
     height: 15px;
     width: 15px;
     vertical-align: initial;
 }
-.legenda .kolorea.ez-dago-bozketara-deitua img {
+
+.legenda .kolorea.ez-dago-bozketara-deitua img, .sinbolo-proportzionalen-maparen-legenda .kolorea.ez-dago-bozketara-deitua img {
     vertical-align: super;
 }
+
 #kredituak {
     color: #333;
     font-size: 11px;
