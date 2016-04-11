@@ -75,6 +75,23 @@ body {
   stroke: #000;
 }
 
+#zirkuluen-legenda {
+    position: absolute;
+    top: 1215px;
+    left: 25px;
+}
+
+#zirkuluen-legenda img {
+    width: 175px;
+}
+
+#zirkuluen-oharra {
+    font-size: 14px;
+    color: rgb(51, 51, 51);
+    margin-left: 20px;
+    width: 160px;
+}
+
 .legenda {
     left: 480px;
     position: absolute;
