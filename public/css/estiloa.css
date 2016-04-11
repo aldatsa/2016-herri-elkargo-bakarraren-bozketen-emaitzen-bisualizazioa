@@ -71,6 +71,10 @@ body {
     stroke-width: .25px;
 }
 
+.zirkulua :hover {
+  stroke: #000;
+}
+
 .legenda {
     left: 480px;
     position: absolute;
