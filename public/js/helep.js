@@ -31,6 +31,46 @@
 
     }
 
+    function onMouseOut(d) {
+
+        tip.hide();
+
+    }
+
+    function onMouseOver(d) {
+
+        if (["Hendaia", "Biriatu", "Urruña", "Ziburu", "Azkaine", "Getaria"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
+            tip.direction("e");
+        } else if (["Larraine", "Urdatx/ Santa-Grazi"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
+            tip.direction("n");
+        } else if (["Hauze", "Montori = Berorize", "Atharratze-Sorholüze", "Barkoxe", "Eskiula", "Sohüta", "Mitikile-larrori-Mendibile"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
+            tip.direction("w");
+        } else {
+            tip.direction("s");
+        }
+
+        tip.html(function(d) {
+
+            var katea = "<div><strong>" + d.properties.datuak.euskarazko_izena + "</strong></div>" +
+                        "<div>Biztanleak: " + d.properties.datuak.biztanleria2015 + "</div>";
+
+            if (d.properties.datuak.emaitza === "bai") {
+                katea = katea + "<div>Emaitza: ALDE</div>";
+            } else if (d.properties.datuak.emaitza === "ez") {
+                katea = katea + "<div>Emaitza: KONTRA</div>";
+            } else if (d.properties.datuak.emaitza === "ez-dago-deitua") {
+                katea = katea + "<div>EZ DAGO BOZKETARA DEITUA</div>";
+            } else {
+                katea = katea + "<div>Emaitza: ERABAKITZEKE</div>";
+            }
+
+            return katea;
+
+        });
+
+        tip.show(d);
+    }
+
     var eskala = eskalatu();
 
     var aukerak = {
@@ -216,43 +256,10 @@
                 .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
                 .attr("d", kolore_maparen_bidea)
                 .on("mouseover", function(d) {
-
-                    if (["Hendaia", "Biriatu", "Urruña", "Ziburu", "Azkaine", "Getaria"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
-                        tip.direction("e");
-                    } else if (["Larraine", "Urdatx/ Santa-Grazi"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
-                        tip.direction("n");
-                    } else if (["Hauze", "Montori = Berorize", "Atharratze-Sorholüze", "Barkoxe", "Eskiula", "Sohüta", "Mitikile-larrori-Mendibile"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
-                        tip.direction("w");
-                    } else {
-                        tip.direction("s");
-                    }
-
-                    tip.html(function(d) {
-
-                        var katea = "<div><strong>" + d.properties.datuak.euskarazko_izena + "</strong></div>" +
-                                    "<div>Biztanleak: " + d.properties.datuak.biztanleria2015 + "</div>";
-
-                        if (d.properties.datuak.emaitza === "bai") {
-                            katea = katea + "<div>Emaitza: ALDE</div>";
-                        } else if (d.properties.datuak.emaitza === "ez") {
-                            katea = katea + "<div>Emaitza: KONTRA</div>";
-                        } else if (d.properties.datuak.emaitza === "ez-dago-deitua") {
-                            katea = katea + "<div>EZ DAGO BOZKETARA DEITUA</div>";
-                        } else {
-                            katea = katea + "<div>Emaitza: ERABAKITZEKE</div>";
-                        }
-
-                        return katea;
-
-                    });
-
-                    tip.show(d);
-
+                    onMouseOver(d);
                 })
                 .on("mouseout", function(d) {
-
-                    tip.hide();
-
+                    onMouseOut(d);
                 })
                 .call(tip);
 
@@ -297,7 +304,14 @@
                 })
                 .attr("class", "unitatea")
                 .attr("id", function(d) { return "sinbolo-proportzionalen-unitatea-" + d.properties.ud_kodea; })
-                .attr("d", sinbolo_proportzionalen_maparen_bidea);
+                .attr("d", sinbolo_proportzionalen_maparen_bidea)
+                .on("mouseover", function(d) {
+                    onMouseOver(d);
+                })
+                .on("mouseout", function(d) {
+                    onMouseOut(d);
+                })
+                .call(tip);
 
             // Kanpo-mugak (a === b)
             sinbolo_proportzionalen_svg.append("path")
@@ -365,6 +379,12 @@
                     // Daturik ez badago...
                     return "#ffffff";
 
+                })
+                .on("mouseover", function(d) {
+                    onMouseOver(d);
+                })
+                .on("mouseout", function(d) {
+                    onMouseOut(d);
                 });
 
             var biztanleen_grafikoa = c3.generate({
