@@ -328,7 +328,7 @@
                 .range([0, 25]);
 
             sinbolo_proportzionalen_svg.append("g")
-                .attr("class", "bubble")
+                .attr("class", "zirkulua")
                 .selectAll("circle")
                 .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
                 .enter().append("circle")
