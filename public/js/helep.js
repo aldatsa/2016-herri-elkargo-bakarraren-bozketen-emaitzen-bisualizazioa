@@ -406,8 +406,8 @@
                     ],
                     type: "bar",
                     colors: {
-                        "Alde": "#b50000",
-                        "Aurka": "#565656"
+                        "Alde": aukerak.koloreak.bai,
+                        "Aurka": aukerak.koloreak.ez
                     },
                     labels: {
                         format: {
@@ -469,8 +469,8 @@
                     ],
                     type: "bar",
                     colors: {
-                        "Alde": "#b50000",
-                        "Aurka": "#565656"
+                        "Alde": aukerak.koloreak.bai,
+                        "Aurka": aukerak.koloreak.ez
                     },
                     labels: true
                 },
