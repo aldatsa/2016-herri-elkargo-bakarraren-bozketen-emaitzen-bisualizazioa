@@ -100,8 +100,8 @@
         topoJSON: "topoJSON/udalerriak-lapurdi-behe-nafarroa-zuberoa.json",
         json_izena: "udalerriak-l-bn-z",
         koloreak: {
-            bai: "#b50000",
-            ez: "#565656",
+            bai: "#a6ce39",
+            ez: "#c4161c",
             lehenetsia: "#ffffff"
         }
     };
@@ -406,8 +406,8 @@
                     ],
                     type: "bar",
                     colors: {
-                        "Alde": "#b50000",
-                        "Aurka": "#565656"
+                        "Alde": aukerak.koloreak.bai,
+                        "Aurka": aukerak.koloreak.ez
                     },
                     labels: {
                         format: {
@@ -469,8 +469,8 @@
                     ],
                     type: "bar",
                     colors: {
-                        "Alde": "#b50000",
-                        "Aurka": "#565656"
+                        "Alde": aukerak.koloreak.bai,
+                        "Aurka": aukerak.koloreak.ez
                     },
                     labels: true
                 },

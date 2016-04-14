@@ -52,17 +52,17 @@ body {
 
 .eskualde-mugak {
     fill: none;
-    stroke: #777;
+    stroke: #666;
     stroke-width: 0.5px;
     stroke-linejoin: round;
 }
 
 .kanpo-mugak {
     fill: #fff;
-    stroke: #777;
+    stroke: #666;
     stroke-width: 2px;
     stroke-linejoin: round;
-    filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4));
+    /*filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.4));*/
 }
 
 .zirkulua {
