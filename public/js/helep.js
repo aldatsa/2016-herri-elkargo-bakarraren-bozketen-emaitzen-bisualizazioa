@@ -52,7 +52,7 @@
         tip.html(function(d) {
 
             var katea = "<div><strong>" + d.properties.datuak.euskarazko_izena + "</strong></div>" +
-                        "<div>Biztanleak: " + d.properties.datuak.biztanleria2015 + "</div>";
+                        "<div>Biztanleak: " + d.properties.datuak.biztanleria2016 + "</div>";
 
             if (d.properties.datuak.emaitza === "bai") {
                 katea = katea + "<div>Emaitza: ALDE</div>";
@@ -184,11 +184,11 @@
                 // j: indizea
                 topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features.forEach(function(e, j) {
 
-                    var biztanleria2015 = 0;
+                    var biztanleria2016 = 0;
 
                     if (d.lurralde_kodea === e.properties.ud_kodea) {
 
-                        biztanleria2015 = parseInt(d.biztanleria2015.replace(/\./g, ''), 10);
+                        biztanleria2016 = parseInt(d.biztanleria2016.replace(/\./g, ''), 10);
 
                         // Udalerri honetako datuak mapako bere elementuarekin lotu.
                         e.properties.datuak = d;
@@ -198,21 +198,21 @@
                             if (d.emaitza === "bai") {
 
                                 herriak.alde++;
-                                biztanleak.alde = biztanleak.alde + biztanleria2015;
+                                biztanleak.alde = biztanleak.alde + biztanleria2016;
 
                             } else if (d.emaitza === "ez") {
 
                                 herriak.aurka++;
-                                biztanleak.aurka = biztanleak.aurka + biztanleria2015;
+                                biztanleak.aurka = biztanleak.aurka + biztanleria2016;
 
                             } else {
 
                                 herriak.erabakitzeke++;
-                                biztanleak.erabakitzeke = biztanleak.erabakitzeke + biztanleria2015;
+                                biztanleak.erabakitzeke = biztanleak.erabakitzeke + biztanleria2016;
 
                             }
 
-                            biztanleak.guztira = biztanleak.guztira + biztanleria2015;
+                            biztanleak.guztira = biztanleak.guztira + biztanleria2016;
 
                             herriak.guztira++;
 
@@ -220,6 +220,8 @@
                     }
                 });
             });
+
+            console.log(biztanleak.guztira);
 
             // Udal guztiak.
             svg.selectAll(".unitatea")
@@ -335,7 +337,7 @@
                 .domain([0,
                         d3.max(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features,
                                function(d) {
-                                   return parseInt(d.properties.datuak.biztanleria2015.replace(/\./g, ''), 10);
+                                   return parseInt(d.properties.datuak.biztanleria2016.replace(/\./g, ''), 10);
                                }
                         )
                 ])
@@ -354,7 +356,7 @@
                     // Bozkatu duten udalerriek bakarrik izango dute zirkulua.
                     if (d.properties.datuak && d.properties.datuak.emaitza && d.properties.datuak.emaitza !== "ez-dago-deitua") {
 
-                        return radius(parseInt(d.properties.datuak.biztanleria2015.replace(/\./g, ''), 10));
+                        return radius(parseInt(d.properties.datuak.biztanleria2016.replace(/\./g, ''), 10));
 
                     }
                 })
