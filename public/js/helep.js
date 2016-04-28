@@ -439,9 +439,12 @@
                 },
                 grid: {
                     y: {
-                        lines: [
-                            {value: Math.round(biztanleak.guztira / 2), text: "Biztanleen erdiak: " + Math.round(biztanleak.guztira / 2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."), axis: "y", position: "start"},
-                        ]
+                        lines: [{
+                            value: Math.round(biztanleak.guztira / 2),
+                            text: "Erdiak: " + Math.round(biztanleak.guztira / 2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."),
+                            axis: "y",
+                            position: "end"
+                        }]
                     }
                 },
                 tooltip: {
@@ -493,9 +496,12 @@
                 },
                 grid: {
                     y: {
-                        lines: [
-                            {value: Math.round(herriak.guztira / 2), text: "Herrien erdiak: " + Math.round(herriak.guztira / 2), axis: "y", position: "start"},
-                        ]
+                        lines: [{
+                            value: Math.round(herriak.guztira / 2),
+                            text: "Erdiak: " + Math.round(herriak.guztira / 2),
+                            axis: "y",
+                            position: "end"
+                        }]
                     }
                 },
                 tooltip: {
