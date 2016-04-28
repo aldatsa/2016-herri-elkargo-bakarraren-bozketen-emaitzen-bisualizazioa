@@ -143,11 +143,14 @@
         .direction('s')
         .offset([0, 0]);
 
+    // Lixoze kontutan izan.
+    // Biarno da baina HELEPen bozketara deitua dago.
+    // Momentuz ez dago mapan.
     var herriak = {
         alde: 0,
         aurka: 0,
         erabakitzeke: 0,
-        guztira: 0
+        guztira: 1
     };
 
     // Lixozeren biztanleak kontutan izan.
@@ -225,7 +228,7 @@
             });
 
             console.log(biztanleak.guztira);
-
+            console.log(herriak.guztira);
             // Udal guztiak.
             svg.selectAll(".unitatea")
                 .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
