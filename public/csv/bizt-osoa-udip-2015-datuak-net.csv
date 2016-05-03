@@ -29,10 +29,10 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64065,Lapurdi,Azkaine,Ascain,4.156,,,,,4.167
 64066,Nafarroa Beherea,Azkarate,Ascarat,313,bai,,,,324
 64081,Zuberoa,Altzürükü,Aussurucq,249,bai,,,,252
-64086,Nafarroa Beherea,Aiherra,Ayherre,992,,,,,1.006
+64086,Nafarroa Beherea,Aiherra,Ayherre,992,bai,,,,1.006
 64092,Nafarroa Beherea,Banka,Banca,332,bai,,,,337
 64093,Zuberoa,Barkoxe,Barcus,693,bai,,,,673
-64094,Lapurdi,Bardoze,Bardos,1.672,,,,,1.723
+64094,Lapurdi,Bardoze,Bardos,1.672,bai,,,,1.723
 64100,Lapurdi,Basusarri,Bassussarry,2.490,bai,,,,2.559
 64102,Lapurdi,Baiona,Bayonne-Nord,45.855,bai,,,,47.492
 64105,Nafarroa Beherea,Behauze,Béguios,252,,,,,242
@@ -47,7 +47,7 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64125,Lapurdi,Bidarte,Bidart,6.513,ez,,,,6.566
 64130,Lapurdi,Biriatu,Biriatou,1.140,bai,,,,1.167
 64134,Lapurdi,Lekuine,Bonloc,370,,,,,369
-64140,Lapurdi,Bokale,Boucau,7.782,,,,,7.837
+64140,Lapurdi,Bokale,Boucau,7.782,ez,,,,7.837
 64147,Lapurdi,Beskoitze,Briscous,2.642,bai,,,,2.647
 64150,Nafarroa Beherea,Bunuze,Bunus,163,bai,,,,153
 64154,Nafarroa Beherea,Duzunaritze-Sarrasketa,Bussunarits-Sarrasquette,170,bai,,,,170
@@ -149,7 +149,7 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64509,Zuberoa,Zalgize-Doneztebe,Sauguis-Saint-Étienne,160,bai,,,,158
 64527,Lapurdi,Zuraide,Souraïde,1.293,bai,,,,1.351
 64528,Nafarroa Beherea,Suhuskune,Suhescun,180,bai,,,,173
-64533,Zuberoa,Atharratze-Sorholüze,Tardets-Sorholus,606,,,,,606
+64533,Zuberoa,Atharratze-Sorholüze,Tardets-Sorholus,606,bai,,,,606
 64537,Zuberoa,Iruri,Trois-Villes,141,bai,,,,142
 64538,Nafarroa Beherea,Uharte-Garazi,Uhart-Cize,731,,,,,760
 64539,Nafarroa Beherea,Uharte-Hiri,Uhart-Mixe,226,,,,,220
@@ -158,5 +158,5 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64545,Lapurdi,Urruña,Urrugne,9.218,,,,,9.216
 64546,Lapurdi,Ahurti,Urt,2.220,,,,,2.218
 64547,Lapurdi,Ustaritze,Ustaritz,6.294,bai,,,,6.362
-64558,Lapurdi,Milafranga,Villefranque,2.370,,,,,2.484
+64558,Lapurdi,Milafranga,Villefranque,2.370,bai,,,,2.484
 64559,Zuberoa,Bildoze-Onizepea,Viodos-Abense-de-Bas,759,,,,,748
