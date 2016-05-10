@@ -6,12 +6,12 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64010,Nafarroa Beherea,Aiziritze,Aïcirits-Camou-Suhast,656,bai,,,,670
 64011,Nafarroa Beherea,Aintzila,Aincille,129,bai,,,,124
 64012,Zuberoa,Ainharbe,Ainharp,143,bai,,,,138
-64013,Nafarroa Beherea,Ainhize-Monjolose,Ainhice-Mongelos,157,,,,,161
+64013,Nafarroa Beherea,Ainhize-Monjolose,Ainhice-Mongelos,157,bai,,,,161
 64014,Lapurdi,Ainhoa,Ainhoa,669,bai,,,,666
 64015,Zuberoa,Altzai-Altzabeheti-Zunharreta,Alçay-Alçabéhéty-Sunharette,228,,,,,227
 64016,Nafarroa Beherea,Aldude,Aldudes,338,,,,,321
 64017,Zuberoa,Aloze-Ziboze-Onizegaine,Alos-Sibas-Abense,303,bai,,,,305
-64018,Nafarroa Beherea,Amenduze-Unaso,Amendeuix-Oneix,428,,,,,435
+64018,Nafarroa Beherea,Amenduze-Unaso,Amendeuix-Oneix,428,bai,,,,435
 64019,Nafarroa Beherea,Amorotze-Zokotze,Amorots-Succos,235,,,,,240
 64024,Lapurdi,Angelu,Anglet-Nord,39.223,ez,3,35,1,39.184
 64026,Nafarroa Beherea,Anhauze,Anhaux,344,bai,,,,370
@@ -35,7 +35,7 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64094,Lapurdi,Bardoze,Bardos,1.672,bai,,,,1.723
 64100,Lapurdi,Basusarri,Bassussarry,2.490,bai,,,,2.559
 64102,Lapurdi,Baiona,Bayonne-Nord,45.855,bai,,,,47.492
-64105,Nafarroa Beherea,Behauze,Béguios,252,,,,,242
+64105,Nafarroa Beherea,Behauze,Béguios,252,bai,,,,242
 64106,Nafarroa Beherea,Behaskane-Laphizketa,Béhasque-Lapiste,454,bai,,,,455
 64107,Nafarroa Beherea,Behorlegi,Béhorléguy,76,bai,,,,75
 64113,Nafarroa Beherea,Burgue-Erreiti,Bergouey-Viellenave,128,,,,,125
@@ -151,12 +151,12 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64528,Nafarroa Beherea,Suhuskune,Suhescun,180,bai,,,,173
 64533,Zuberoa,Atharratze-Sorholüze,Tardets-Sorholus,606,bai,,,,606
 64537,Zuberoa,Iruri,Trois-Villes,141,bai,,,,142
-64538,Nafarroa Beherea,Uharte-Garazi,Uhart-Cize,731,,,,,760
-64539,Nafarroa Beherea,Uharte-Hiri,Uhart-Mixe,226,,,,,220
+64538,Nafarroa Beherea,Uharte-Garazi,Uhart-Cize,731,ez,,,,760
+64539,Nafarroa Beherea,Uharte-Hiri,Uhart-Mixe,226,bai,,,,220
 64540,Lapurdi,Urketa,Urcuit,2.326,bai,,,,2.344
 64543,Nafarroa Beherea,Urepele,Urepel,316,bai,,,,305
 64545,Lapurdi,Urruña,Urrugne,9.218,,,,,9.216
-64546,Lapurdi,Ahurti,Urt,2.220,,,,,2.218
+64546,Lapurdi,Ahurti,Urt,2.220,bai,,,,2.218
 64547,Lapurdi,Ustaritze,Ustaritz,6.294,bai,,,,6.362
 64558,Lapurdi,Milafranga,Villefranque,2.370,bai,,,,2.484
 64559,Zuberoa,Bildoze-Onizepea,Viodos-Abense-de-Bas,759,,,,,748
