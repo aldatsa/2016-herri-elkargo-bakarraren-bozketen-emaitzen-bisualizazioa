@@ -43,7 +43,7 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64120,Nafarroa Beherea,Mithiriña,Beyrie-sur-Joyeuse,509,,,,,512
 64122,Lapurdi,Biarritz/Miarritze,Biarritz-Est,25.330,ez,,,,24.993
 64123,Nafarroa Beherea,Bidaxune,Bidache,1.317,ez,,,,1.327
-64124,Nafarroa Beherea,Bidarrai,Bidarray,671,,,,,685
+64124,Nafarroa Beherea,Bidarrai,Bidarray,671,bai,,,,685
 64125,Lapurdi,Bidarte,Bidart,6.513,ez,,,,6.566
 64130,Lapurdi,Biriatu,Biriatou,1.140,bai,,,,1.167
 64134,Lapurdi,Lekuine,Bonloc,370,,,,,369
@@ -135,10 +135,10 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64476,Nafarroa Beherea,Donostiri,Saint-Esteben,450,bai,,,,475
 64477,Nafarroa Beherea,Baigorri,Saint-Étienne-de-Baïgorry,1.601,bai,,,,1.619
 64483,Lapurdi,Donibane Lohizune,Saint-Jean-de-Luz,12.994,bai,,,,12.967
-64484,Nafarroa Beherea,Donazaharre,Saint-Jean-le-Vieux,864,,,,,862
+64484,Nafarroa Beherea,Donazaharre,Saint-Jean-le-Vieux,864,bai,,,,862
 64485,Nafarroa Beherea,Donibane-Garazi,Saint-Jean-Pied-de-Port,1.486,,,,,1.527
 64487,Nafarroa Beherea,Donaixti-Ibarre,Saint-Just-Ibarre,236,,,,,233
-64489,Nafarroa Beherea,Donamartiri,Saint-Martin-d'Arberoue,329,,,,,325
+64489,Nafarroa Beherea,Donamartiri,Saint-Martin-d'Arberoue,329,bai,,,,325
 64490,Nafarroa Beherea,Arrosa,Saint-Martin-d'Arrossa,505,bai,,,,523
 64492,Nafarroa Beherea,Eiheralarre,Saint-Michel,269,bai,,,,276
 64493,Nafarroa Beherea,Donapaleu,Saint-Palais,1.856,,,,,1.854
