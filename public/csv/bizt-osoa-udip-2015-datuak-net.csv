@@ -83,7 +83,7 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64265,Nafarroa Beherea,Hozta,Hosta,79,bai,,,,79
 64267,Nafarroa Beherea,Ibarla,Ibarrolle,95,ez,,,,93
 64268,Zuberoa,Idauze-Mendi,Idaux-Mendy,262,bai,,,,259
-64271,Nafarroa Beherea,Iholdi,Iholdy,576,,,,,574
+64271,Nafarroa Beherea,Iholdi,Iholdy,576,bai,,,,574
 64272,Nafarroa Beherea,Ilharre,Ilharre,148,,,,,148
 64273,Nafarroa Beherea,Irisarri,Irissarry,857,bai,,,,866
 64274,Nafarroa Beherea,Irulegi,Irouléguy,355,ez,,,,370
@@ -100,7 +100,7 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64303,Zuberoa,Liginaga-Astüe,Laguinge-Restoue,182,ez,,,,183
 64304,Lapurdi,Lehuntze,Lahonce,2.041,bai,,,,2.139
 64313,Nafarroa Beherea,Landibarre,Lantabat,296,ez,,,,298
-64314,Nafarroa Beherea,Larzabale-Arroze-Zibitze,Larceveau-Arros-Cibits,403,,,,,404
+64314,Nafarroa Beherea,Larzabale-Arroze-Zibitze,Larceveau-Arros-Cibits,403,ez,,,,404
 64316,Zuberoa,Larraine,Larrau,194,bai,,,,191
 64317,Lapurdi,Larresoro,Larressore,1.694,bai,,,,1.816
 64319,Nafarroa Beherea,Larribarre-Sorhapürü,Larribar-Sorhapuru,189,ez,,,,194
@@ -123,7 +123,7 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64407,Lapurdi,Mugerre,Mouguerre,4.741,bai,,,,4.825
 64411,Zuberoa,Muskildi,Musculdy,233,bai,,,,235
 64424,Zuberoa,Urdiñarbe,Ordiarp,529,bai,,,,531
-64425,Nafarroa Beherea,Oragarre,Orègue,474,,,,,484
+64425,Nafarroa Beherea,Oragarre,Orègue,474,ez,,,,484
 64429,Nafarroa Beherea,Ostankoa,Orsanco,99,ez,,,,100
 64432,Zuberoa,Ozaze-Zühara,Ossas-Suhare,94,bai,,,,95
 64435,Zuberoa,Ozaraine-Erribareitia,Osserain-Rivareyte,219,ez,,,,214
