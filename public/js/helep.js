@@ -150,7 +150,7 @@
         alde: 0,
         aurka: 0,
         erabakitzeke: 0,
-        guztira: 1
+        guztira: 0
     };
 
     // Lixozeren biztanleak kontutan izan.
@@ -160,7 +160,7 @@
         alde: 0,
         aurka: 0,
         erabakitzeke: 0,
-        guztira: 139
+        guztira: 0
     };
 
     // HELEP emaitzen datuak irakurri dagokion CSVtik.
