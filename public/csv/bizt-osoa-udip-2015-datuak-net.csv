@@ -8,7 +8,7 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64012,Zuberoa,Ainharbe,Ainharp,143,bai,,,,138
 64013,Nafarroa Beherea,Ainhize-Monjolose,Ainhice-Mongelos,157,bai,,,,161
 64014,Lapurdi,Ainhoa,Ainhoa,669,bai,,,,666
-64015,Zuberoa,Altzai-Altzabeheti-Zunharreta,Alçay-Alçabéhéty-Sunharette,228,,,,,227
+64015,Zuberoa,Altzai-Altzabeheti-Zunharreta,Alçay-Alçabéhéty-Sunharette,228,bai,,,,227
 64016,Nafarroa Beherea,Aldude,Aldudes,338,bai,,,,321
 64017,Zuberoa,Aloze-Ziboze-Onizegaine,Alos-Sibas-Abense,303,bai,,,,305
 64018,Nafarroa Beherea,Amenduze-Unaso,Amendeuix-Oneix,428,bai,,,,435
@@ -79,7 +79,7 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64258,Zuberoa,Hauze,Haux,87,ez,,,,85
 64259,Nafarroa Beherea,Heleta,Hélette,749,bai,,,,740
 64260,Lapurdi,Hendaia,Hendaye,16.759,bai,,,,16.887
-64264,Zuberoa,Ospitalepea,(L')Hôpital-Saint-Blaise,80,,,,,77
+64264,Zuberoa,Ospitalepea,(L')Hôpital-Saint-Blaise,80,bai,,,,77
 64265,Nafarroa Beherea,Hozta,Hosta,79,bai,,,,79
 64267,Nafarroa Beherea,Ibarla,Ibarrolle,95,ez,,,,93
 64268,Zuberoa,Idauze-Mendi,Idaux-Mendy,262,bai,,,,259
@@ -91,11 +91,11 @@ IPAR,,IPARRALDE,Iparralde / Pays Basque Nord,296.434,,,,,299.129
 64277,Nafarroa Beherea,Isturitze,Isturits,467,bai,,,,475
 64279,Lapurdi,Itsasu,Itxassou,2.022,bai,,,,2.026
 64282,Lapurdi,Jatsu,Jatxou,1.106,bai,,,,1.116
-64283,Nafarroa Beherea,Jatsu,Jaxu,172,,,,,180
+64283,Nafarroa Beherea,Jatsu,Jaxu,172,bai,,,,180
 64285,Nafarroa Beherea,Jutsi,Juxue,210,ez,,,,203
 64289,Nafarroa Beherea,Bastida,(La)Bastide-Clairence,1.018,bai,,,,1.031
 64294,Nafarroa Beherea,Labetze-Bizkai,Labets-Biscay,153,ez,,,,149
-64297,Nafarroa Beherea,Lakarra,Lacarre,166,,,,,168
+64297,Nafarroa Beherea,Lakarra,Lacarre,166,bai,,,,168
 64298,Zuberoa,Lakarri-Arhane-Sarrikotagaine,Lacarry-Arhan-Charritte-de-Haut,127,bai,,,,126
 64303,Zuberoa,Liginaga-Astüe,Laguinge-Restoue,182,ez,,,,183
 64304,Lapurdi,Lehuntze,Lahonce,2.041,bai,,,,2.139
