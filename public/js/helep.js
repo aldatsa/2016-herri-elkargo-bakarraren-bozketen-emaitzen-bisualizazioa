@@ -147,6 +147,7 @@
         alde: 0,
         aurka: 0,
         erabakitzeke: 0,
+        ez_daude_deituak: 0,
         guztira: 0
     };
 
@@ -154,8 +155,12 @@
         alde: 0,
         aurka: 0,
         erabakitzeke: 0,
+        ez_daude_deituak: 0,
         guztira: 0
     };
+
+    var herri_elkargoak = {};
+    var herrialdeak = {};
 
     // HELEP emaitzen datuak irakurri dagokion CSVtik.
     d3.csv(aukerak.emaitzakCSV, function(error, emaitzak) {
@@ -193,36 +198,133 @@
                         // Udalerri honetako datuak mapako bere elementuarekin lotu.
                         e.properties.datuak = d;
 
-                        if (e.properties.datuak.emaitza !== "ez-dago-deitua") {
+                        if (!herri_elkargoak[d.herri_elkargoa_2016]) {
 
-                            if (d.emaitza === "bai") {
-
-                                herriak.alde++;
-                                biztanleak.alde = biztanleak.alde + biztanleria2016;
-
-                            } else if (d.emaitza === "ez") {
-
-                                herriak.aurka++;
-                                biztanleak.aurka = biztanleak.aurka + biztanleria2016;
-
-                            } else {
-
-                                herriak.erabakitzeke++;
-                                biztanleak.erabakitzeke = biztanleak.erabakitzeke + biztanleria2016;
-
+                            herri_elkargoak[d.herri_elkargoa_2016] = {
+                                herriak: {
+                                    alde: 0,
+                                    aurka: 0,
+                                    erabakitzeke: 0,
+                                    ez_daude_deituak: 0
+                                },
+                                biztanleak: {
+                                    alde: 0,
+                                    aurka: 0,
+                                    erabakitzeke: 0,
+                                    ez_daude_deituak: 0
+                                }
                             }
-
-                            biztanleak.guztira = biztanleak.guztira + biztanleria2016;
-
-                            herriak.guztira++;
-
                         }
+
+                        if (!herrialdeak[d.herrialdea]) {
+
+                            herrialdeak[d.herrialdea] = {
+                                herriak: {
+                                    alde: 0,
+                                    aurka: 0,
+                                    erabakitzeke: 0,
+                                    ez_daude_deituak: 0
+                                },
+                                biztanleak: {
+                                    alde: 0,
+                                    aurka: 0,
+                                    erabakitzeke: 0,
+                                    ez_daude_deituak: 0
+                                }
+                            }
+                        }
+
+                        if (d.emaitza === "bai") {
+
+                            herriak.alde++;
+                            biztanleak.alde = biztanleak.alde + biztanleria2016;
+                            herri_elkargoak[d.herri_elkargoa_2016].herriak.alde++;
+                            herri_elkargoak[d.herri_elkargoa_2016].biztanleak.alde = herri_elkargoak[d.herri_elkargoa_2016].biztanleak.alde + biztanleria2016;
+                            herrialdeak[d.herrialdea].herriak.alde++;
+                            herrialdeak[d.herrialdea].biztanleak.alde = herrialdeak[d.herrialdea].biztanleak.alde + biztanleria2016;
+
+                        } else if (d.emaitza === "ez") {
+
+                            herriak.aurka++;
+                            biztanleak.aurka = biztanleak.aurka + biztanleria2016;
+                            herri_elkargoak[d.herri_elkargoa_2016].herriak.aurka++;
+                            herri_elkargoak[d.herri_elkargoa_2016].biztanleak.aurka = herri_elkargoak[d.herri_elkargoa_2016].biztanleak.aurka + biztanleria2016;
+                            herrialdeak[d.herrialdea].herriak.aurka++;
+                            herrialdeak[d.herrialdea].biztanleak.aurka = herrialdeak[d.herrialdea].biztanleak.aurka + biztanleria2016;
+
+                        } else if (d.emaitza === "ez-dago-deitua") {
+
+                            herriak.ez_daude_deituak++;
+                            biztanleak.ez_daude_deituak = biztanleak.ez_daude_deituak + biztanleria2016;
+                            herri_elkargoak[d.herri_elkargoa_2016].herriak.ez_daude_deituak++;
+                            herri_elkargoak[d.herri_elkargoa_2016].biztanleak.ez_daude_deituak = herri_elkargoak[d.herri_elkargoa_2016].biztanleak.ez_daude_deituak + biztanleria2016;
+                            herrialdeak[d.herrialdea].herriak.ez_daude_deituak++;
+                            herrialdeak[d.herrialdea].biztanleak.ez_daude_deituak = herrialdeak[d.herrialdea].biztanleak.ez_daude_deituak + biztanleria2016;
+
+                        } else {
+
+                            herriak.erabakitzeke++;
+                            biztanleak.erabakitzeke = biztanleak.erabakitzeke + biztanleria2016;
+                            herri_elkargoak[d.herri_elkargoa_2016].herriak.erabakitzeke++;
+                            herri_elkargoak[d.herri_elkargoa_2016].biztanleak.erabakitzeke = herri_elkargoak[d.herri_elkargoa_2016].biztanleak.erabakitzeke + biztanleria2016;
+                            herrialdeak[d.herrialdea].herriak.erabakitzeke++;
+                            herrialdeak[d.herrialdea].biztanleak.erabakitzeke = herrialdeak[d.herrialdea].biztanleak.erabakitzeke + biztanleria2016;
+                        }
+
+                        biztanleak.guztira = biztanleak.guztira + biztanleria2016;
+
+                        herriak.guztira++;
                     }
                 });
             });
 
             console.log(biztanleak.guztira);
             console.log(herriak.guztira);
+            console.log(JSON.stringify(herriak, null, 2));
+            console.log(JSON.stringify(biztanleak, null, 2));
+            console.log(JSON.stringify(herri_elkargoak, null, 2));
+            console.log(JSON.stringify(herrialdeak, null, 2));
+
+            // Aurreko herri elkargoen datuen taula eguneratu.
+            for (var herri_elkargoa in herri_elkargoak) {
+
+                var herri_elkargoak_taula = document.getElementById("herri-elkargoak-taula");
+
+                herri_elkargoak_taula.insertAdjacentHTML("beforeend",
+                    "<tr>" +
+                        "<td>" + herri_elkargoa + "</td>" +
+                        "<td>" + herri_elkargoak[herri_elkargoa].herriak.alde + "</td>" +
+                        "<td>" + herri_elkargoak[herri_elkargoa].herriak.aurka + "</td>" +
+                        "<td>" + herri_elkargoak[herri_elkargoa].herriak.erabakitzeke + "</td>" +
+                        "<td>" + herri_elkargoak[herri_elkargoa].herriak.ez_daude_deituak + "</td>" +
+                        "<td>" + herri_elkargoak[herri_elkargoa].biztanleak.alde + "</td>" +
+                        "<td>" + herri_elkargoak[herri_elkargoa].biztanleak.aurka + "</td>" +
+                        "<td>" + herri_elkargoak[herri_elkargoa].biztanleak.erabakitzeke + "</td>" +
+                        "<td>" + herri_elkargoak[herri_elkargoa].biztanleak.ez_daude_deituak + "</td>" +
+                    "</tr>"
+                );
+            }
+
+            // Herrialdeen datuen taula eguneratu.
+            for (var herrialdea in herrialdeak) {
+
+                var herrialdeak_taula = document.getElementById("herrialdeak-taula");
+
+                herrialdeak_taula.insertAdjacentHTML("beforeend",
+                    "<tr>" +
+                        "<td>" + herrialdea + "</td>" +
+                        "<td>" + herrialdeak[herrialdea].herriak.alde + "</td>" +
+                        "<td>" + herrialdeak[herrialdea].herriak.aurka + "</td>" +
+                        "<td>" + herrialdeak[herrialdea].herriak.erabakitzeke + "</td>" +
+                        "<td>" + herrialdeak[herrialdea].herriak.ez_daude_deituak + "</td>" +
+                        "<td>" + herrialdeak[herrialdea].biztanleak.alde + "</td>" +
+                        "<td>" + herrialdeak[herrialdea].biztanleak.aurka + "</td>" +
+                        "<td>" + herrialdeak[herrialdea].biztanleak.erabakitzeke + "</td>" +
+                        "<td>" + herrialdeak[herrialdea].biztanleak.ez_daude_deituak + "</td>" +
+                    "</tr>"
+                );
+            }
+
             // Udal guztiak.
             svg.selectAll(".unitatea")
                 .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
@@ -427,15 +529,15 @@
                         show: false
                     },
                     y: {
-                        max: biztanleak.guztira,
+                        max: biztanleak.guztira - biztanleak.ez_daude_deituak,
                         show: false
                     }
                 },
                 grid: {
                     y: {
                         lines: [{
-                            value: Math.round(biztanleak.guztira / 2),
-                            text: "Erdiak: " + Math.round(biztanleak.guztira / 2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."),
+                            value: Math.round((biztanleak.guztira - biztanleak.ez_daude_deituak) / 2),
+                            text: "Erdiak: " + Math.round((biztanleak.guztira - biztanleak.ez_daude_deituak) / 2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."),
                             axis: "y",
                             position: "end"
                         }]
@@ -484,15 +586,15 @@
                         show: false
                     },
                     y: {
-                        max: herriak.guztira,
+                        max: herriak.guztira - herriak.ez_daude_deituak,
                         show: false
                     }
                 },
                 grid: {
                     y: {
                         lines: [{
-                            value: Math.round(herriak.guztira / 2),
-                            text: "Erdiak: " + Math.round(herriak.guztira / 2),
+                            value: Math.round((herriak.guztira - herriak.ez_daude_deituak) / 2),
+                            text: "Erdiak: " + Math.round((herriak.guztira - herriak.ez_daude_deituak) / 2),
                             axis: "y",
                             position: "end"
                         }]
