@@ -37,7 +37,7 @@
 
     }
 
-    function onMouseOver(d) {
+    function onMouseOver(d, zein_mapa) {
 
         // Udalerrien mapek d.properties.datuak daukate, herri elkargoarenak ez.
         if (d.properties.datuak) {
@@ -51,14 +51,22 @@
                 tip.direction("s");
             }
         } else {
-            if (["Hego Lapurdiko Hirigunea",].indexOf(d.properties.IZENA_EU) >= 0) {
-                tip.direction("e");
-            } else if (["Garazi-Baigorri herri elkargoa"].indexOf(d.properties.IZENA_EU) >= 0) {
-                tip.direction("n");
-            } else if (["Xiberoa herri alkargoa", "Oloroealdeko herri elkargoa"].indexOf(d.properties.IZENA_EU) >= 0) {
-                tip.direction("w");
-            } else {
-                tip.direction("s");
+
+            if (zein_mapa === "elkargoen-koropleta-mapa") {
+
+                if (["Hego Lapurdiko Hirigunea", "Euskal Kostaldea - Aturri hirigunea", "Errobi herri elkargoa"].indexOf(d.properties.IZENA_EU) >= 0) {
+                    tip.direction("e");
+                } else {
+                    tip.direction("s");
+                }
+
+            } else if (zein_mapa === "elkargoen-sinbolo-proportzionalen-mapa") {
+
+                if (["Xiberoa herri alkargoa", "Oloroealdeko herri elkargoa"].indexOf(d.properties.IZENA_EU) >= 0) {
+                   tip.direction("w");
+               } else {
+                   tip.direction("s");
+               }
             }
         }
 
@@ -163,7 +171,7 @@
                 .attr("id", function(d) { return "unitatea_" + d.properties.H_ELK_KODE; })
                 .attr("d", herri_elkargoen_koropleta_maparen_bidea)
                 .on("mouseover", function(d) {
-                    onMouseOver(d);
+                    onMouseOver(d, "elkargoen-koropleta-mapa");
                 })
                 .on("mouseout", function(d) {
                     onMouseOut(d);
@@ -218,7 +226,7 @@
                 .attr("id", function(d) { return "sinbolo-proportzionalen-unitatea-" + d.properties.H_ELK_KODE; })
                 .attr("d", herri_elkargoen_sinbolo_proportzionalen_maparen_bidea)
                 .on("mouseover", function(d) {
-                    onMouseOver(d);
+                    onMouseOver(d, "elkargoen-sinbolo-proportzionalen-mapa");
                 })
                 .on("mouseout", function(d) {
                     onMouseOut(d);
@@ -285,7 +293,7 @@
 
                 })
                 .on("mouseover", function(d) {
-                    onMouseOver(d);
+                    onMouseOver(d, "elkargoen-sinbolo-proportzionalen-mapa");
                 })
                 .on("mouseout", function(d) {
                     onMouseOut(d);
@@ -585,7 +593,7 @@
             });
 
             bistaratuHerrialdeenTaulakoDatuak(herrialdeak);
-            
+
             // Udal guztiak.
             svg.selectAll(".unitatea")
                 .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
