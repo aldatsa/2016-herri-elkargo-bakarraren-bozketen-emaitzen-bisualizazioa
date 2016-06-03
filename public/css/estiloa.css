@@ -183,3 +183,16 @@ body {
 .herri-elkargoa-mapa-taula .alde, .herri-elkargoa-mapa-taula .aurka {
     text-align: right;
 }
+.emaitzak-herrialdeka-taula .herrialdea {
+    width: 320px;
+    padding: 10px;
+    float: left;
+    margin-top: 20px;
+}
+.emaitzak-herrialdeka-taula .herrialdea.zuberoa, .emaitzak-herrialdeka-taula .herrialdea.biarno {
+    margin-top: 40px;
+}
+
+.emaitzak-herrialdeka-taula img {
+    width: 100px;
+}
