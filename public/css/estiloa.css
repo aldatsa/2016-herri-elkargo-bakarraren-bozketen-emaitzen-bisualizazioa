@@ -183,18 +183,32 @@ body {
 .herri-elkargoa-mapa-taula .alde, .herri-elkargoa-mapa-taula .aurka {
     text-align: right;
 }
-.emaitzak-herrialdeka-taula .herrialdea {
+.emaitzak-unitateka-taula .herrialdea {
     width: 320px;
     padding: 10px;
     float: left;
     margin-top: 20px;
 }
-.emaitzak-herrialdeka-taula .herrialdea.zuberoa, .emaitzak-herrialdeka-taula .herrialdea.biarno {
+.emaitzak-unitateka-taula .herrialdea.zuberoa, .emaitzak-unitateka-taula .herrialdea.biarno {
     margin-top: 40px;
 }
-
-.emaitzak-herrialdeka-taula img {
+.emaitzak-unitateka-taula .herrialdea img {
     width: 100px;
+}
+.emaitzak-unitateka-taula .elkargoa {
+    width: 200px;
+    padding: 10px;
+    float: left;
+    margin-top: 20px;
+}
+.emaitzak-unitateka-taula .elkargoa img {
+    height: 60px;
+}
+.emaitzak-unitateka-taula .elkargoa .izenburua {
+    font-size: 18px;
+}
+.emaitzak-unitateka-taula .elkargoa tr {
+    font-size: 14px;
 }
 .atal-burua {
     text-align: center;

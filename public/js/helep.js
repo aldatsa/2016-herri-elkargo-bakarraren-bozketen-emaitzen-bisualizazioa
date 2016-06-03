@@ -301,7 +301,8 @@
         });
     }
 
-    function bistaratuHerrialdeenTaulakoDatuak(herrialdeen_datuak) {
+    function bistaratuHerrialdeenTaulakoDatuak(herrialdeak) {
+
         document.getElementById("lapurdi-herriak-alde").innerHTML = herrialdeak["Lapurdi"].herriak.alde;
         document.getElementById("nafarroa-beherea-herriak-alde").innerHTML = herrialdeak["Nafarroa Beherea"].herriak.alde;
         document.getElementById("zuberoa-herriak-alde").innerHTML = herrialdeak["Zuberoa"].herriak.alde;
@@ -321,6 +322,54 @@
         document.getElementById("nafarroa-beherea-biztanleak-aurka").innerHTML = herrialdeak["Nafarroa Beherea"].biztanleak.aurka;
         document.getElementById("zuberoa-biztanleak-aurka").innerHTML = herrialdeak["Zuberoa"].biztanleak.aurka;
         document.getElementById("biarno-biztanleak-aurka").innerHTML = herrialdeak["Biarno"].biztanleak.aurka;
+    }
+
+    function bistaratuElkargoenTaulakoDatuak(elkargoak) {
+
+        document.getElementById("amikuze-herriak-alde").innerHTML = elkargoak["Amikuzeko herri elkargoa"].herriak.alde;
+        document.getElementById("aturri-errobi-herriak-alde").innerHTML = elkargoak["Aturri Errobi herri elkargoa"].herriak.alde;
+        document.getElementById("bidaxune-herriak-alde").innerHTML = elkargoak["Bidaxuneko herri elkargoa"].herriak.alde;
+        document.getElementById("errobi-herriak-alde").innerHTML = elkargoak["Errobi herri elkargoa"].herriak.alde;
+        document.getElementById("euskal-kostaldea-herriak-alde").innerHTML = elkargoak["Euskal Kostaldea - Aturri hirigunea"].herriak.alde;
+        document.getElementById("garazi-baigorri-herriak-alde").innerHTML = elkargoak["Garazi-Baigorri herri elkargoa"].herriak.alde;
+        document.getElementById("hazparne-herriak-alde").innerHTML = elkargoak["Hazparneko Lurraldea herri elkargoa"].herriak.alde;
+        document.getElementById("hego-lapurdi-herriak-alde").innerHTML = elkargoak["Hego Lapurdiko Hirigunea"].herriak.alde;
+        document.getElementById("iholdi-oztibarre-herriak-alde").innerHTML = elkargoak["Iholdi-Oztibarreko herri elkargoa"].herriak.alde;
+        document.getElementById("xiberoa-herriak-alde").innerHTML = elkargoak["Xiberoa herri alkargoa"].herriak.alde;
+
+        document.getElementById("amikuze-herriak-aurka").innerHTML = elkargoak["Amikuzeko herri elkargoa"].herriak.aurka;
+        document.getElementById("aturri-errobi-herriak-aurka").innerHTML = elkargoak["Aturri Errobi herri elkargoa"].herriak.aurka;
+        document.getElementById("bidaxune-herriak-aurka").innerHTML = elkargoak["Bidaxuneko herri elkargoa"].herriak.aurka;
+        document.getElementById("errobi-herriak-aurka").innerHTML = elkargoak["Errobi herri elkargoa"].herriak.aurka;
+        document.getElementById("euskal-kostaldea-herriak-aurka").innerHTML = elkargoak["Euskal Kostaldea - Aturri hirigunea"].herriak.aurka;
+        document.getElementById("garazi-baigorri-herriak-aurka").innerHTML = elkargoak["Garazi-Baigorri herri elkargoa"].herriak.aurka;
+        document.getElementById("hazparne-herriak-aurka").innerHTML = elkargoak["Hazparneko Lurraldea herri elkargoa"].herriak.aurka;
+        document.getElementById("hego-lapurdi-herriak-aurka").innerHTML = elkargoak["Hego Lapurdiko Hirigunea"].herriak.aurka;
+        document.getElementById("iholdi-oztibarre-herriak-aurka").innerHTML = elkargoak["Iholdi-Oztibarreko herri elkargoa"].herriak.aurka;
+        document.getElementById("xiberoa-herriak-aurka").innerHTML = elkargoak["Xiberoa herri alkargoa"].herriak.aurka;
+
+        document.getElementById("amikuze-biztanleak-alde").innerHTML = elkargoak["Amikuzeko herri elkargoa"].biztanleak.alde;
+        document.getElementById("aturri-errobi-biztanleak-alde").innerHTML = elkargoak["Aturri Errobi herri elkargoa"].biztanleak.alde;
+        document.getElementById("bidaxune-biztanleak-alde").innerHTML = elkargoak["Bidaxuneko herri elkargoa"].biztanleak.alde;
+        document.getElementById("errobi-biztanleak-alde").innerHTML = elkargoak["Errobi herri elkargoa"].biztanleak.alde;
+        document.getElementById("euskal-kostaldea-biztanleak-alde").innerHTML = elkargoak["Euskal Kostaldea - Aturri hirigunea"].biztanleak.alde;
+        document.getElementById("garazi-baigorri-biztanleak-alde").innerHTML = elkargoak["Garazi-Baigorri herri elkargoa"].biztanleak.alde;
+        document.getElementById("hazparne-biztanleak-alde").innerHTML = elkargoak["Hazparneko Lurraldea herri elkargoa"].biztanleak.alde;
+        document.getElementById("hego-lapurdi-biztanleak-alde").innerHTML = elkargoak["Hego Lapurdiko Hirigunea"].biztanleak.alde;
+        document.getElementById("iholdi-oztibarre-biztanleak-alde").innerHTML = elkargoak["Iholdi-Oztibarreko herri elkargoa"].biztanleak.alde;
+        document.getElementById("xiberoa-biztanleak-alde").innerHTML = elkargoak["Xiberoa herri alkargoa"].biztanleak.alde;
+
+        document.getElementById("amikuze-biztanleak-aurka").innerHTML = elkargoak["Amikuzeko herri elkargoa"].biztanleak.aurka;
+        document.getElementById("aturri-errobi-biztanleak-aurka").innerHTML = elkargoak["Aturri Errobi herri elkargoa"].biztanleak.aurka;
+        document.getElementById("bidaxune-biztanleak-aurka").innerHTML = elkargoak["Bidaxuneko herri elkargoa"].biztanleak.aurka;
+        document.getElementById("errobi-biztanleak-aurka").innerHTML = elkargoak["Errobi herri elkargoa"].biztanleak.aurka;
+        document.getElementById("euskal-kostaldea-biztanleak-aurka").innerHTML = elkargoak["Euskal Kostaldea - Aturri hirigunea"].biztanleak.aurka;
+        document.getElementById("garazi-baigorri-biztanleak-aurka").innerHTML = elkargoak["Garazi-Baigorri herri elkargoa"].biztanleak.aurka;
+        document.getElementById("hazparne-biztanleak-aurka").innerHTML = elkargoak["Hazparneko Lurraldea herri elkargoa"].biztanleak.aurka;
+        document.getElementById("hego-lapurdi-biztanleak-aurka").innerHTML = elkargoak["Hego Lapurdiko Hirigunea"].biztanleak.aurka;
+        document.getElementById("iholdi-oztibarre-biztanleak-aurka").innerHTML = elkargoak["Iholdi-Oztibarreko herri elkargoa"].biztanleak.aurka;
+        document.getElementById("xiberoa-biztanleak-aurka").innerHTML = elkargoak["Xiberoa herri alkargoa"].biztanleak.aurka;
+
     }
 
     var eskala = eskalatu();
@@ -593,6 +642,7 @@
             });
 
             bistaratuHerrialdeenTaulakoDatuak(herrialdeak);
+            bistaratuElkargoenTaulakoDatuak(herri_elkargoak);
 
             // Udal guztiak.
             svg.selectAll(".unitatea")
