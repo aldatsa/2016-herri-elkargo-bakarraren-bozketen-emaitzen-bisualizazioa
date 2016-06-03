@@ -216,14 +216,14 @@
             }
         },
         herri_elkargoen_koropleta_mapa: {
-            zabalera: 680,
-            altuera: 500,
+            zabalera: 340,
+            altuera: 250,
             proiekzioa: {
                 erdia: {
                     lat: -1.22,
                     lng: 43.25
                 },
-                eskala: 32000
+                eskala: 16000
             }
         },
         emaitzakCSV: "csv/bizt-osoa-udip-2015-datuak-net.csv",
