@@ -96,9 +96,22 @@
                 eskala: 32000
             }
         },
+        herri_elkargoen_koropleta_mapa: {
+            zabalera: 680,
+            altuera: 500,
+            proiekzioa: {
+                erdia: {
+                    lat: -1.22,
+                    lng: 43.25
+                },
+                eskala: 32000
+            }
+        },
         emaitzakCSV: "csv/bizt-osoa-udip-2015-datuak-net.csv",
         topoJSON: "topoJSON/udalerriak-lapurdi-behe-nafarroa-zuberoa.json",
+        topoJSON_herri_elkargoak: "topoJSON/herri_elkargoak.topo.json",
         json_izena: "udalerriak-l-bn-z",
+        json_izena_herri_elkargoak: "herri_elkargoak",
         koloreak: {
             bai: "#a6ce39",
             ez: "#c4161c",
@@ -107,24 +120,34 @@
     };
 
     // Kolore-maparen proiekzioaren xehetasunak.
-    var kolore_maparen_proiektzioa = d3.geo.mercator()
+    var kolore_maparen_proiekzioa = d3.geo.mercator()
         .center([aukerak.kolore_mapa.proiekzioa.erdia.lat, aukerak.kolore_mapa.proiekzioa.erdia.lng])
         .scale(aukerak.kolore_mapa.proiekzioa.eskala)
         .translate([aukerak.kolore_mapa.zabalera / 2, aukerak.kolore_mapa.altuera / 2]);
 
     // Sinbolo proportzionalen maparen proiekzioaren xehetasunak.
-    var sinbolo_proportzionalen_maparen_proiektzioa = d3.geo.mercator()
+    var sinbolo_proportzionalen_maparen_proiekzioa = d3.geo.mercator()
         .center([aukerak.sinbolo_proportzionalen_mapa.proiekzioa.erdia.lat, aukerak.sinbolo_proportzionalen_mapa.proiekzioa.erdia.lng])
         .scale(aukerak.sinbolo_proportzionalen_mapa.proiekzioa.eskala)
         .translate([aukerak.sinbolo_proportzionalen_mapa.zabalera / 2, aukerak.sinbolo_proportzionalen_mapa.altuera / 2]);
 
+    // Herri elkargoen koropleta maparen proiekzioaren xehetasunak.
+    var herri_elkargoen_koropleta_maparen_proiekzioa = d3.geo.mercator()
+        .center([aukerak.herri_elkargoen_koropleta_mapa.proiekzioa.erdia.lat, aukerak.herri_elkargoen_koropleta_mapa.proiekzioa.erdia.lng])
+        .scale(aukerak.herri_elkargoen_koropleta_mapa.proiekzioa.eskala)
+        .translate([aukerak.herri_elkargoen_koropleta_mapa.zabalera / 2, aukerak.herri_elkargoen_koropleta_mapa.altuera / 2]);
+
     // Kolore-maparen bidearen generatzailea.
     var kolore_maparen_bidea = d3.geo.path()
-        .projection(kolore_maparen_proiektzioa);
+        .projection(kolore_maparen_proiekzioa);
 
     // Sinbolo proportzionalen maparen bidearen generatzailea.
     var sinbolo_proportzionalen_maparen_bidea = d3.geo.path()
-        .projection(sinbolo_proportzionalen_maparen_proiektzioa);
+        .projection(sinbolo_proportzionalen_maparen_proiekzioa);
+
+    // Herri elkargoen kolore-maparen bidearen generatzailea.
+    var herri_elkargoen_koropleta_maparen_bidea = d3.geo.path()
+        .projection(herri_elkargoen_koropleta_maparen_proiekzioa);
 
     // Maparen svg elementua eskuratu eta neurriak ezarri.
     var svg = d3.select("#mapa svg")
@@ -135,6 +158,11 @@
     var sinbolo_proportzionalen_svg = d3.select("#sinbolo-proportzionalen-mapa svg")
         .attr("width", aukerak.sinbolo_proportzionalen_mapa.zabalera)
         .attr("height", aukerak.sinbolo_proportzionalen_mapa.altuera);
+
+    // Herri elkargoen koropleta maparen svg elementua eskuratu eta neurriak ezarri.
+    var herri_elkargoen_koropleta_mapa_svg = d3.select("#herri-elkargoen-koropleta-mapa svg")
+        .attr("width", aukerak.herri_elkargoen_koropleta_mapa.zabalera)
+        .attr("height", aukerak.herri_elkargoen_koropleta_mapa.altuera);
 
     var tip = d3.tip()
         .attr('class', 'd3-tip')
@@ -278,12 +306,12 @@
                 });
             });
 
-            console.log(biztanleak.guztira);
-            console.log(herriak.guztira);
-            console.log(JSON.stringify(herriak, null, 2));
-            console.log(JSON.stringify(biztanleak, null, 2));
-            console.log(JSON.stringify(herri_elkargoak, null, 2));
-            console.log(JSON.stringify(herrialdeak, null, 2));
+            //console.log(biztanleak.guztira);
+            //console.log(herriak.guztira);
+            //console.log(JSON.stringify(herriak, null, 2));
+            //console.log(JSON.stringify(biztanleak, null, 2));
+            //console.log(JSON.stringify(herri_elkargoak, null, 2));
+            //console.log(JSON.stringify(herrialdeak, null, 2));
 
             // Aurreko herri elkargoen datuen taula eguneratu.
             for (var herri_elkargoa in herri_elkargoak) {
@@ -615,4 +643,74 @@
             });
         });
     });
+
+    // Datu geografikoak irakurri dagokion topoJSONetik.
+    d3.json(aukerak.topoJSON_herri_elkargoak, function(error, geodatuak) {
+
+        if (error) {
+            return console.error(error);
+        }
+        console.log(geodatuak);
+        console.log(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak]).features);
+        console.log(herri_elkargoen_koropleta_mapa_svg);
+        herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea")
+            .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak]).features)
+            .enter().append("path")
+            .attr("fill", function(d) {
+                console.log(d);
+                // Herri elkargoko emaitzen arabera koloreztatuko dugu.
+                /*if (d.properties.datuak && d.properties.datuak.emaitza) {
+
+                    if (d.properties.datuak.emaitza === "ez-dago-deitua")  {
+
+                        return "url('#pattern-stripe')";
+
+                    // Emaitza HELEParen aldekoa bada...
+                    } else if (d.properties.datuak.emaitza === "bai") {
+
+                        return aukerak.koloreak.bai;
+
+                    // Kontrakoa bada berriz...
+                    } else {
+
+                        return aukerak.koloreak.ez;
+
+                    }
+
+                }*/
+
+                // Emaitzarik ez badago...
+                return aukerak.koloreak.lehenetsia;
+
+            })
+            .attr("class", "unitatea")
+            .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
+            .attr("d", kolore_maparen_bidea)
+            .on("mouseover", function(d) {
+                onMouseOver(d);
+            })
+            .on("mouseout", function(d) {
+                onMouseOut(d);
+            });
+            //.call(tip);
+
+        // Kanpo-mugak (a === b)
+        herri_elkargoen_koropleta_mapa_svg.append("path")
+            .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a === b; }))
+            .attr("d", herri_elkargoen_koropleta_maparen_bidea)
+            .attr("class", "kanpo-mugak");
+
+        // Unitateak aurreko planora ekarri.
+        herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea").each(function() {
+            var sel = d3.select(this);
+            sel.moveToFront();
+        });
+
+        // Eskualdeen arteko mugak (a !== b)
+        herri_elkargoen_koropleta_mapa_svg.append("path")
+            .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a !== b; }))
+            .attr("d", herri_elkargoen_koropleta_maparen_bidea)
+            .attr("class", "eskualde-mugak");
+    });
+
 }());
