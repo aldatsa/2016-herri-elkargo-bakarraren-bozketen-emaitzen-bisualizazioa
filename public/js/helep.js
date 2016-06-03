@@ -71,6 +71,72 @@
         tip.show(d);
     }
 
+    function marraztuHerriElkargoenMapa() {
+
+        // Datu geografikoak irakurri dagokion topoJSONetik.
+        d3.json(aukerak.topoJSON_herri_elkargoak, function(error, geodatuak) {
+
+            if (error) {
+                return console.error(error);
+            }
+
+            herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea")
+                .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak]).features)
+                .enter().append("path")
+                .attr("fill", function(d) {
+
+                    // Herri elkargoko emaitzen arabera koloreztatuko dugu.
+                    if (herri_elkargoak[d.properties.IZENA_EU].herriak.ez_daude_deituak > 0)  {
+
+                        return "url('#pattern-stripe')";
+
+                    // Emaitza HELEParen aldekoa bada...
+                    } else if (herri_elkargoak[d.properties.IZENA_EU].herriak.alde > herri_elkargoak[d.properties.IZENA_EU].herriak.aurka) {
+
+                        return aukerak.koloreak.bai;
+
+                    // Kontrakoa bada berriz...
+                    } else {
+
+                        return aukerak.koloreak.ez;
+
+                    }
+
+                    // Emaitzarik ez badago...
+                    return aukerak.koloreak.lehenetsia;
+
+                })
+                .attr("class", "unitatea")
+                .attr("id", function(d) { return "unitatea_" + d.properties.H_ELK_KODE; })
+                .attr("d", herri_elkargoen_koropleta_maparen_bidea)
+                .on("mouseover", function(d) {
+                    onMouseOver(d);
+                })
+                .on("mouseout", function(d) {
+                    onMouseOut(d);
+                })
+                .call(tip);
+
+            // Kanpo-mugak (a === b)
+            herri_elkargoen_koropleta_mapa_svg.append("path")
+                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a === b; }))
+                .attr("d", herri_elkargoen_koropleta_maparen_bidea)
+                .attr("class", "kanpo-mugak");
+
+            // Unitateak aurreko planora ekarri.
+            herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea").each(function() {
+                var sel = d3.select(this);
+                sel.moveToFront();
+            });
+
+            // Eskualdeen arteko mugak (a !== b)
+            herri_elkargoen_koropleta_mapa_svg.append("path")
+                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a !== b; }))
+                .attr("d", herri_elkargoen_koropleta_maparen_bidea)
+                .attr("class", "eskualde-mugak");
+        });
+    }
+    
     var eskala = eskalatu();
 
     var aukerak = {
@@ -638,69 +704,4 @@
         marraztuHerriElkargoenMapa();
     });
 
-    function marraztuHerriElkargoenMapa() {
-
-        // Datu geografikoak irakurri dagokion topoJSONetik.
-        d3.json(aukerak.topoJSON_herri_elkargoak, function(error, geodatuak) {
-
-            if (error) {
-                return console.error(error);
-            }
-
-            herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea")
-                .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak]).features)
-                .enter().append("path")
-                .attr("fill", function(d) {
-
-                    // Herri elkargoko emaitzen arabera koloreztatuko dugu.
-                    if (herri_elkargoak[d.properties.IZENA_EU].herriak.ez_daude_deituak > 0)  {
-
-                        return "url('#pattern-stripe')";
-
-                    // Emaitza HELEParen aldekoa bada...
-                    } else if (herri_elkargoak[d.properties.IZENA_EU].herriak.alde > herri_elkargoak[d.properties.IZENA_EU].herriak.aurka) {
-
-                        return aukerak.koloreak.bai;
-
-                    // Kontrakoa bada berriz...
-                    } else {
-
-                        return aukerak.koloreak.ez;
-
-                    }
-
-                    // Emaitzarik ez badago...
-                    return aukerak.koloreak.lehenetsia;
-
-                })
-                .attr("class", "unitatea")
-                .attr("id", function(d) { return "unitatea_" + d.properties.H_ELK_KODE; })
-                .attr("d", herri_elkargoen_koropleta_maparen_bidea)
-                .on("mouseover", function(d) {
-                    onMouseOver(d);
-                })
-                .on("mouseout", function(d) {
-                    onMouseOut(d);
-                })
-                .call(tip);
-
-            // Kanpo-mugak (a === b)
-            herri_elkargoen_koropleta_mapa_svg.append("path")
-                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a === b; }))
-                .attr("d", herri_elkargoen_koropleta_maparen_bidea)
-                .attr("class", "kanpo-mugak");
-
-            // Unitateak aurreko planora ekarri.
-            herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea").each(function() {
-                var sel = d3.select(this);
-                sel.moveToFront();
-            });
-
-            // Eskualdeen arteko mugak (a !== b)
-            herri_elkargoen_koropleta_mapa_svg.append("path")
-                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a !== b; }))
-                .attr("d", herri_elkargoen_koropleta_maparen_bidea)
-                .attr("class", "eskualde-mugak");
-        });
-    }
 }());
