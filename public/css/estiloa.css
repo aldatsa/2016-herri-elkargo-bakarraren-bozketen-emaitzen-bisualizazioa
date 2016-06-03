@@ -11,8 +11,9 @@ body {
     margin: 0 auto 0 auto;
     width: 680px;
     position: relative;
-    height: 1440px;
+    height: 1950px;
     font-size: 16px;
+    border: 1px solid black;
 }
 
 .izenburua {
@@ -165,4 +166,20 @@ body {
     position: absolute;
     left: 430px;
     top: 280px;
+}
+.herri-elkargoa-mapa-taula {
+    margin-top: 10px;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.herri-elkargoa-mapa-taula thead tr {
+    background-color: #b50000;
+    color: #fff;
+}
+.herri-elkargoa-mapa-taula tbody tr:first-child {
+    border-bottom: 2px solid #ddd;
+}
+.herri-elkargoa-mapa-taula .alde, .herri-elkargoa-mapa-taula .aurka {
+    text-align: right;
 }

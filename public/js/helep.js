@@ -39,31 +39,84 @@
 
     function onMouseOver(d) {
 
-        if (["Hendaia", "Biriatu", "Urruña", "Ziburu", "Azkaine", "Getaria"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
-            tip.direction("e");
-        } else if (["Larraine", "Urdatx/ Santa-Grazi"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
-            tip.direction("n");
-        } else if (["Hauze", "Montori = Berorize", "Atharratze-Sorholüze", "Barkoxe", "Eskiula", "Sohüta", "Mitikile-larrori-Mendibile"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
-            tip.direction("w");
+        // Udalerrien mapek d.properties.datuak daukate, herri elkargoarenak ez.
+        if (d.properties.datuak) {
+            if (["Hendaia", "Biriatu", "Urruña", "Ziburu", "Azkaine", "Getaria"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
+                tip.direction("e");
+            } else if (["Larraine", "Urdatx/ Santa-Grazi"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
+                tip.direction("n");
+            } else if (["Hauze", "Montori = Berorize", "Atharratze-Sorholüze", "Barkoxe", "Eskiula", "Sohüta", "Mitikile-larrori-Mendibile"].indexOf(d.properties.datuak.euskarazko_izena) >= 0) {
+                tip.direction("w");
+            } else {
+                tip.direction("s");
+            }
         } else {
-            tip.direction("s");
+            if (["Hego Lapurdiko Hirigunea",].indexOf(d.properties.IZENA_EU) >= 0) {
+                tip.direction("e");
+            } else if (["Garazi-Baigorri herri elkargoa"].indexOf(d.properties.IZENA_EU) >= 0) {
+                tip.direction("n");
+            } else if (["Xiberoa herri alkargoa", "Oloroealdeko herri elkargoa"].indexOf(d.properties.IZENA_EU) >= 0) {
+                tip.direction("w");
+            } else {
+                tip.direction("s");
+            }
         }
 
         tip.html(function(d) {
 
-            var katea = "<div><strong>" + d.properties.datuak.euskarazko_izena + "</strong></div>" +
+            var katea = "";
+
+            // Udalerrien mapek d.properties.datuak daukate, herri elkargoarenak ez.
+            if (d.properties.datuak) {
+
+                katea = "<div><strong>" + d.properties.datuak.euskarazko_izena + "</strong></div>" +
                         "<div>Biztanleak: " + d.properties.datuak.biztanleria2016 + "</div>";
 
-            if (d.properties.datuak.emaitza === "bai") {
-                katea = katea + "<div>Emaitza: ALDE</div>";
-            } else if (d.properties.datuak.emaitza === "ez") {
-                katea = katea + "<div>Emaitza: KONTRA</div>";
-            } else if (d.properties.datuak.emaitza === "ez-dago-deitua") {
-                katea = katea + "<div>EZ DAGO BOZKETARA DEITUA</div>";
+                if (d.properties.datuak.emaitza === "bai") {
+                    katea = katea + "<div>Emaitza: ALDE</div>";
+                } else if (d.properties.datuak.emaitza === "ez") {
+                    katea = katea + "<div>Emaitza: KONTRA</div>";
+                } else if (d.properties.datuak.emaitza === "ez-dago-deitua") {
+                    katea = katea + "<div>EZ DAGO BOZKETARA DEITUA</div>";
+                } else {
+                    katea = katea + "<div>Emaitza: ERABAKITZEKE</div>";
+                }
             } else {
-                katea = katea + "<div>Emaitza: ERABAKITZEKE</div>";
-            }
 
+                if (herri_elkargoak[d.properties.IZENA_EU].herriak.ez_daude_deituak > 0) {
+
+                    katea = "<div><strong>" + d.properties.IZENA_EU + " (Biarno)</strong></div>";
+
+                    if (d.properties.IZENA_EU === "Salbaterraldeko herri elkargoa") {
+                        katea = katea + "<div class='oharra'>Jeztaze ez dago bozketara deitua</div>";
+                    } else if (d.properties.IZENA_EU === "Oloroealdeko herri elkargoa") {
+                        katea = katea + "<div class='oharra'>Eskiula ez dago bozketara deitua</div>";
+                    }
+                } else {
+                    katea = "<div><strong>" + d.properties.IZENA_EU + "</strong></div>" +
+                            "<table class='herri-elkargoa-mapa-taula'>" +
+                                "<thead>" +
+                                    "<tr>" +
+                                        "<th></th>" +
+                                        "<th class='alde'>Alde</th>" +
+                                        "<th class='aurka'>Aurka</th>" +
+                                    "</tr>" +
+                                "</thead>" +
+                                "<tbody>" +
+                                    "<tr>" +
+                                        "<td>Herriak</td>" +
+                                        "<td class='alde'>" + herri_elkargoak[d.properties.IZENA_EU].herriak.alde + "</td>" +
+                                        "<td class='aurka'>" + herri_elkargoak[d.properties.IZENA_EU].herriak.aurka + "</td>" +
+                                    "</tr>" +
+                                    "<tr>" +
+                                    "<td>Biztanleak</td>" +
+                                        "<td class='alde'>" + herri_elkargoak[d.properties.IZENA_EU].biztanleak.alde + "</td>" +
+                                        "<td class='aurka'>" + herri_elkargoak[d.properties.IZENA_EU].biztanleak.aurka + "</td>" +
+                                    "</tr>" +
+                                "</tbody>" +
+                            "</table>"
+                }
+            }
             return katea;
 
         });
@@ -136,7 +189,7 @@
                 .attr("class", "eskualde-mugak");
         });
     }
-    
+
     var eskala = eskalatu();
 
     var aukerak = {
