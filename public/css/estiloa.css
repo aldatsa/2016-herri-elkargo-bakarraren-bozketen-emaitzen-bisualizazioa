@@ -200,3 +200,6 @@ body {
     text-align: center;
     margin-top: 40px;
 }
+#herri-elkargoen-koropleta-mapa, #herri-elkargoen-sinbolo-proportzionalen-mapa {
+    display: inline-block;
+}

@@ -319,8 +319,8 @@
             }
         },
         herri_elkargoen_koropleta_mapa: {
-            zabalera: 340,
-            altuera: 250,
+            zabalera: 330,
+            altuera: 240,
             proiekzioa: {
                 erdia: {
                     lat: -1.22,
@@ -330,8 +330,8 @@
             }
         },
         herri_elkargoen_sinbolo_proportzionalen_mapa: {
-            zabalera: 340,
-            altuera: 250,
+            zabalera: 330,
+            altuera: 240,
             proiekzioa: {
                 erdia: {
                     lat: -1.22,
