@@ -192,7 +192,7 @@
 
     // HELEP emaitzen datuak irakurri dagokion CSVtik.
     d3.csv(aukerak.emaitzakCSV, function(error, emaitzak) {
-        console.log(emaitzak);
+
         if (error) {
             return console.error(error);
         }
@@ -203,7 +203,6 @@
             if (error) {
                 return console.error(error);
             }
-            console.log(geodatuak);
 
             // Emaitzak eta topoJSON-a bateratzeko ideia hemendik hartu dut, behar bada badago modu hobe bat.
             // http://stackoverflow.com/questions/22994316/how-to-reference-csv-alongside-geojson-for-d3-rollover
@@ -310,7 +309,7 @@
             //console.log(herriak.guztira);
             //console.log(JSON.stringify(herriak, null, 2));
             //console.log(JSON.stringify(biztanleak, null, 2));
-            //console.log(JSON.stringify(herri_elkargoak, null, 2));
+            console.log(JSON.stringify(herri_elkargoak, null, 2));
             //console.log(JSON.stringify(herrialdeak, null, 2));
 
             // Aurreko herri elkargoen datuen taula eguneratu.
@@ -642,31 +641,31 @@
                 }
             });
         });
+
+        marraztuHerriElkargoenMapa();
     });
 
-    // Datu geografikoak irakurri dagokion topoJSONetik.
-    d3.json(aukerak.topoJSON_herri_elkargoak, function(error, geodatuak) {
+    function marraztuHerriElkargoenMapa() {
 
-        if (error) {
-            return console.error(error);
-        }
-        console.log(geodatuak);
-        console.log(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak]).features);
-        console.log(herri_elkargoen_koropleta_mapa_svg);
-        herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea")
-            .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak]).features)
-            .enter().append("path")
-            .attr("fill", function(d) {
-                console.log(d);
-                // Herri elkargoko emaitzen arabera koloreztatuko dugu.
-                /*if (d.properties.datuak && d.properties.datuak.emaitza) {
+        // Datu geografikoak irakurri dagokion topoJSONetik.
+        d3.json(aukerak.topoJSON_herri_elkargoak, function(error, geodatuak) {
 
-                    if (d.properties.datuak.emaitza === "ez-dago-deitua")  {
+            if (error) {
+                return console.error(error);
+            }
+
+            herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea")
+                .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak]).features)
+                .enter().append("path")
+                .attr("fill", function(d) {
+                    
+                    // Herri elkargoko emaitzen arabera koloreztatuko dugu.
+                    if (herri_elkargoak[d.properties.IZENA_EU].herriak.ez_daude_deituak > 0)  {
 
                         return "url('#pattern-stripe')";
 
                     // Emaitza HELEParen aldekoa bada...
-                    } else if (d.properties.datuak.emaitza === "bai") {
+                    } else if (herri_elkargoak[d.properties.IZENA_EU].herriak.alde > herri_elkargoak[d.properties.IZENA_EU].herriak.aurka) {
 
                         return aukerak.koloreak.bai;
 
@@ -677,40 +676,38 @@
 
                     }
 
-                }*/
+                    // Emaitzarik ez badago...
+                    return aukerak.koloreak.lehenetsia;
 
-                // Emaitzarik ez badago...
-                return aukerak.koloreak.lehenetsia;
+                })
+                .attr("class", "unitatea")
+                .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
+                .attr("d", kolore_maparen_bidea)
+                .on("mouseover", function(d) {
+                    onMouseOver(d);
+                })
+                .on("mouseout", function(d) {
+                    onMouseOut(d);
+                });
+                //.call(tip);
 
-            })
-            .attr("class", "unitatea")
-            .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
-            .attr("d", kolore_maparen_bidea)
-            .on("mouseover", function(d) {
-                onMouseOver(d);
-            })
-            .on("mouseout", function(d) {
-                onMouseOut(d);
-            });
-            //.call(tip);
+            // Kanpo-mugak (a === b)
+            herri_elkargoen_koropleta_mapa_svg.append("path")
+                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a === b; }))
+                .attr("d", herri_elkargoen_koropleta_maparen_bidea)
+                .attr("class", "kanpo-mugak");
 
-        // Kanpo-mugak (a === b)
-        herri_elkargoen_koropleta_mapa_svg.append("path")
-            .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a === b; }))
-            .attr("d", herri_elkargoen_koropleta_maparen_bidea)
-            .attr("class", "kanpo-mugak");
+            // Unitateak aurreko planora ekarri.
+            /*herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea").each(function() {
+                var sel = d3.select(this);
+                sel.moveToFront();
+            });*/
 
-        // Unitateak aurreko planora ekarri.
-        herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea").each(function() {
-            var sel = d3.select(this);
-            sel.moveToFront();
+            // Eskualdeen arteko mugak (a !== b)
+            herri_elkargoen_koropleta_mapa_svg.append("path")
+                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a !== b; }))
+                .attr("d", herri_elkargoen_koropleta_maparen_bidea)
+                .attr("class", "eskualde-mugak");
         });
-
-        // Eskualdeen arteko mugak (a !== b)
-        herri_elkargoen_koropleta_mapa_svg.append("path")
-            .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a !== b; }))
-            .attr("d", herri_elkargoen_koropleta_maparen_bidea)
-            .attr("class", "eskualde-mugak");
-    });
-
+    }
 }());
