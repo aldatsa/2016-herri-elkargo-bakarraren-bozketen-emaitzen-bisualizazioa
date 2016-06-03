@@ -424,26 +424,6 @@
                 });
             });
 
-            // Aurreko herri elkargoen datuen taula eguneratu.
-            for (var herri_elkargoa in herri_elkargoak) {
-
-                var herri_elkargoak_taula = document.getElementById("herri-elkargoak-taula");
-
-                herri_elkargoak_taula.insertAdjacentHTML("beforeend",
-                    "<tr>" +
-                        "<td>" + herri_elkargoa + "</td>" +
-                        "<td>" + herri_elkargoak[herri_elkargoa].herriak.alde + "</td>" +
-                        "<td>" + herri_elkargoak[herri_elkargoa].herriak.aurka + "</td>" +
-                        "<td>" + herri_elkargoak[herri_elkargoa].herriak.erabakitzeke + "</td>" +
-                        "<td>" + herri_elkargoak[herri_elkargoa].herriak.ez_daude_deituak + "</td>" +
-                        "<td>" + herri_elkargoak[herri_elkargoa].biztanleak.alde + "</td>" +
-                        "<td>" + herri_elkargoak[herri_elkargoa].biztanleak.aurka + "</td>" +
-                        "<td>" + herri_elkargoak[herri_elkargoa].biztanleak.erabakitzeke + "</td>" +
-                        "<td>" + herri_elkargoak[herri_elkargoa].biztanleak.ez_daude_deituak + "</td>" +
-                    "</tr>"
-                );
-            }
-
             document.getElementById("lapurdi-herriak-alde").innerHTML = herrialdeak["Lapurdi"].herriak.alde;
             document.getElementById("nafarroa-beherea-herriak-alde").innerHTML = herrialdeak["Nafarroa Beherea"].herriak.alde;
             document.getElementById("zuberoa-herriak-alde").innerHTML = herrialdeak["Zuberoa"].herriak.alde;
@@ -463,26 +443,6 @@
             document.getElementById("nafarroa-beherea-biztanleak-aurka").innerHTML = herrialdeak["Nafarroa Beherea"].biztanleak.aurka;
             document.getElementById("zuberoa-biztanleak-aurka").innerHTML = herrialdeak["Zuberoa"].biztanleak.aurka;
             document.getElementById("biarno-biztanleak-aurka").innerHTML = herrialdeak["Biarno"].biztanleak.aurka;
-
-            // Herrialdeen datuen taula eguneratu.
-            for (var herrialdea in herrialdeak) {
-
-                var herrialdeak_taula = document.getElementById("herrialdeak-taula");
-
-                herrialdeak_taula.insertAdjacentHTML("beforeend",
-                    "<tr>" +
-                        "<td>" + herrialdea + "</td>" +
-                        "<td>" + herrialdeak[herrialdea].herriak.alde + "</td>" +
-                        "<td>" + herrialdeak[herrialdea].herriak.aurka + "</td>" +
-                        "<td>" + herrialdeak[herrialdea].herriak.erabakitzeke + "</td>" +
-                        "<td>" + herrialdeak[herrialdea].herriak.ez_daude_deituak + "</td>" +
-                        "<td>" + herrialdeak[herrialdea].biztanleak.alde + "</td>" +
-                        "<td>" + herrialdeak[herrialdea].biztanleak.aurka + "</td>" +
-                        "<td>" + herrialdeak[herrialdea].biztanleak.erabakitzeke + "</td>" +
-                        "<td>" + herrialdeak[herrialdea].biztanleak.ez_daude_deituak + "</td>" +
-                    "</tr>"
-                );
-            }
 
             // Udal guztiak.
             svg.selectAll(".unitatea")
