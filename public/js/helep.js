@@ -124,7 +124,7 @@
         tip.show(d);
     }
 
-    function marraztuHerriElkargoenMapa() {
+    function marraztuHerriElkargoenKoropletaMapa() {
 
         // Datu geografikoak irakurri dagokion topoJSONetik.
         d3.json(aukerak.topoJSON_herri_elkargoak, function(error, geodatuak) {
@@ -190,6 +190,109 @@
         });
     }
 
+    function marraztuHerriElkargoenSinboloProportzionalenMapa() {
+
+        // Datu geografikoak irakurri dagokion topoJSONetik.
+        d3.json(aukerak.topoJSON_herri_elkargoak, function(error, geodatuak) {
+
+            if (error) {
+                return console.error(error);
+            }
+
+            // Elkargo guztiak.
+            herri_elkargoen_sinbolo_proportzionalen_mapa_svg.selectAll(".unitatea")
+                .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak]).features)
+                .enter().append("path")
+                .attr("fill", function(d) {
+
+                    // Herri elkargoko emaitzen arabera koloreztatuko dugu.
+                    if (herri_elkargoak[d.properties.IZENA_EU].herriak.ez_daude_deituak > 0)  {
+                        return "url('#pattern-stripe')";
+                    }
+
+                    // Emaitzarik ez badago...
+                    return aukerak.koloreak.lehenetsia;
+
+                })
+                .attr("class", "unitatea")
+                .attr("id", function(d) { return "sinbolo-proportzionalen-unitatea-" + d.properties.H_ELK_KODE; })
+                .attr("d", herri_elkargoen_sinbolo_proportzionalen_maparen_bidea)
+                .on("mouseover", function(d) {
+                    onMouseOver(d);
+                })
+                .on("mouseout", function(d) {
+                    onMouseOut(d);
+                })
+                .call(tip);
+
+            // Kanpo-mugak (a === b)
+            herri_elkargoen_sinbolo_proportzionalen_mapa_svg.append("path")
+                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a === b; }))
+                .attr("d", herri_elkargoen_sinbolo_proportzionalen_maparen_bidea)
+                .attr("class", "kanpo-mugak");
+
+            // Unitateak aurreko planora ekarri.
+            herri_elkargoen_sinbolo_proportzionalen_mapa_svg.selectAll(".unitatea").each(function() {
+                var sel = d3.select(this);
+                sel.moveToFront();
+            });
+
+            // Eskualdeen arteko mugak (a !== b)
+            herri_elkargoen_sinbolo_proportzionalen_mapa_svg.append("path")
+                .datum(topojson.mesh(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak], function(a, b) { return a !== b; }))
+                .attr("d", herri_elkargoen_sinbolo_proportzionalen_maparen_bidea)
+                .attr("class", "eskualde-mugak");
+
+            var radius = d3.scale.sqrt()
+                .domain([0,
+                        d3.max(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak]).features,
+                               function(d) {
+                                   return herri_elkargoak[d.properties.IZENA_EU].biztanleak.guztira;
+                               }
+                        )
+                ])
+                .range([0, 25]);
+
+            herri_elkargoen_sinbolo_proportzionalen_mapa_svg.append("g")
+                .attr("class", "zirkulua")
+                .selectAll("circle")
+                .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak]).features)
+                .enter().append("circle")
+                .attr("transform", function(d) {
+                    return "translate(" + herri_elkargoen_sinbolo_proportzionalen_maparen_bidea.centroid(d) + ")";
+                })
+                .attr("r", function(d) {
+
+                    return radius(herri_elkargoak[d.properties.IZENA_EU].biztanleak.guztira);
+
+                })
+                .attr("fill", function(d) {
+
+                    // Emaitza HELEParen aldekoa bada...
+                    if (herri_elkargoak[d.properties.IZENA_EU].herriak.alde > herri_elkargoak[d.properties.IZENA_EU].herriak.aurka) {
+
+                        return aukerak.koloreak.bai;
+
+                    // Kontrakoa bada berriz...
+                    } else {
+
+                        return aukerak.koloreak.ez;
+
+                    }
+
+                    // Daturik ez badago...
+                    return "#ffffff";
+
+                })
+                .on("mouseover", function(d) {
+                    onMouseOver(d);
+                })
+                .on("mouseout", function(d) {
+                    onMouseOut(d);
+                });
+        });
+    }
+
     var eskala = eskalatu();
 
     var aukerak = {
@@ -216,6 +319,17 @@
             }
         },
         herri_elkargoen_koropleta_mapa: {
+            zabalera: 340,
+            altuera: 250,
+            proiekzioa: {
+                erdia: {
+                    lat: -1.22,
+                    lng: 43.25
+                },
+                eskala: 16000
+            }
+        },
+        herri_elkargoen_sinbolo_proportzionalen_mapa: {
             zabalera: 340,
             altuera: 250,
             proiekzioa: {
@@ -256,6 +370,12 @@
         .scale(aukerak.herri_elkargoen_koropleta_mapa.proiekzioa.eskala)
         .translate([aukerak.herri_elkargoen_koropleta_mapa.zabalera / 2, aukerak.herri_elkargoen_koropleta_mapa.altuera / 2]);
 
+    // Herri elkargoen sinbolo proportzionalen maparen proiekzioaren xehetasunak.
+    var herri_elkargoen_sinbolo_proportzionalen_maparen_proiekzioa = d3.geo.mercator()
+        .center([aukerak.herri_elkargoen_sinbolo_proportzionalen_mapa.proiekzioa.erdia.lat, aukerak.herri_elkargoen_sinbolo_proportzionalen_mapa.proiekzioa.erdia.lng])
+        .scale(aukerak.herri_elkargoen_sinbolo_proportzionalen_mapa.proiekzioa.eskala)
+        .translate([aukerak.herri_elkargoen_sinbolo_proportzionalen_mapa.zabalera / 2, aukerak.herri_elkargoen_sinbolo_proportzionalen_mapa.altuera / 2]);
+
     // Kolore-maparen bidearen generatzailea.
     var kolore_maparen_bidea = d3.geo.path()
         .projection(kolore_maparen_proiekzioa);
@@ -267,6 +387,10 @@
     // Herri elkargoen kolore-maparen bidearen generatzailea.
     var herri_elkargoen_koropleta_maparen_bidea = d3.geo.path()
         .projection(herri_elkargoen_koropleta_maparen_proiekzioa);
+
+    // Herri elkargoen sinbolo proportzionalen bidearen generatzailea.
+    var herri_elkargoen_sinbolo_proportzionalen_maparen_bidea = d3.geo.path()
+        .projection(herri_elkargoen_sinbolo_proportzionalen_maparen_proiekzioa);
 
     // Maparen svg elementua eskuratu eta neurriak ezarri.
     var svg = d3.select("#mapa svg")
@@ -282,6 +406,11 @@
     var herri_elkargoen_koropleta_mapa_svg = d3.select("#herri-elkargoen-koropleta-mapa svg")
         .attr("width", aukerak.herri_elkargoen_koropleta_mapa.zabalera)
         .attr("height", aukerak.herri_elkargoen_koropleta_mapa.altuera);
+
+    // Herri elkargoen sinbolo proportzionalen maparen svg elementua eskuratu eta neurriak ezarri.
+    var herri_elkargoen_sinbolo_proportzionalen_mapa_svg = d3.select("#herri-elkargoen-sinbolo-proportzionalen-mapa svg")
+        .attr("width", aukerak.herri_elkargoen_sinbolo_proportzionalen_mapa.zabalera)
+        .attr("height", aukerak.herri_elkargoen_sinbolo_proportzionalen_mapa.altuera);
 
     var tip = d3.tip()
         .attr('class', 'd3-tip')
@@ -351,13 +480,15 @@
                                     alde: 0,
                                     aurka: 0,
                                     erabakitzeke: 0,
-                                    ez_daude_deituak: 0
+                                    ez_daude_deituak: 0,
+                                    guztira: 0
                                 },
                                 biztanleak: {
                                     alde: 0,
                                     aurka: 0,
                                     erabakitzeke: 0,
-                                    ez_daude_deituak: 0
+                                    ez_daude_deituak: 0,
+                                    guztira: 0
                                 }
                             }
                         }
@@ -369,13 +500,15 @@
                                     alde: 0,
                                     aurka: 0,
                                     erabakitzeke: 0,
-                                    ez_daude_deituak: 0
+                                    ez_daude_deituak: 0,
+                                    guztira: 0
                                 },
                                 biztanleak: {
                                     alde: 0,
                                     aurka: 0,
                                     erabakitzeke: 0,
-                                    ez_daude_deituak: 0
+                                    ez_daude_deituak: 0,
+                                    guztira: 0
                                 }
                             }
                         }
@@ -418,8 +551,13 @@
                         }
 
                         biztanleak.guztira = biztanleak.guztira + biztanleria2016;
-
                         herriak.guztira++;
+
+                        herri_elkargoak[d.herri_elkargoa_2016].biztanleak.guztira = herri_elkargoak[d.herri_elkargoa_2016].biztanleak.guztira + biztanleria2016;
+                        herrialdeak[d.herrialdea].biztanleak.guztira = herrialdeak[d.herrialdea].biztanleak.guztira + biztanleria2016;
+
+                        herri_elkargoak[d.herri_elkargoa_2016].herriak.guztira++;
+                        herrialdeak[d.herrialdea].herriak.guztira++;
                     }
                 });
             });
@@ -734,7 +872,8 @@
             });
         });
 
-        marraztuHerriElkargoenMapa();
+        marraztuHerriElkargoenKoropletaMapa();
+        marraztuHerriElkargoenSinboloProportzionalenMapa();
     });
 
 }());
