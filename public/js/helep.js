@@ -293,6 +293,28 @@
         });
     }
 
+    function bistaratuHerrialdeenTaulakoDatuak(herrialdeen_datuak) {
+        document.getElementById("lapurdi-herriak-alde").innerHTML = herrialdeak["Lapurdi"].herriak.alde;
+        document.getElementById("nafarroa-beherea-herriak-alde").innerHTML = herrialdeak["Nafarroa Beherea"].herriak.alde;
+        document.getElementById("zuberoa-herriak-alde").innerHTML = herrialdeak["Zuberoa"].herriak.alde;
+        document.getElementById("biarno-herriak-alde").innerHTML = herrialdeak["Biarno"].herriak.alde;
+
+        document.getElementById("lapurdi-herriak-aurka").innerHTML = herrialdeak["Lapurdi"].herriak.aurka;
+        document.getElementById("nafarroa-beherea-herriak-aurka").innerHTML = herrialdeak["Nafarroa Beherea"].herriak.aurka;
+        document.getElementById("zuberoa-herriak-aurka").innerHTML = herrialdeak["Zuberoa"].herriak.aurka;
+        document.getElementById("biarno-herriak-aurka").innerHTML = herrialdeak["Biarno"].herriak.aurka;
+
+        document.getElementById("lapurdi-biztanleak-alde").innerHTML = herrialdeak["Lapurdi"].biztanleak.alde;
+        document.getElementById("nafarroa-beherea-biztanleak-alde").innerHTML = herrialdeak["Nafarroa Beherea"].biztanleak.alde;
+        document.getElementById("zuberoa-biztanleak-alde").innerHTML = herrialdeak["Zuberoa"].biztanleak.alde;
+        document.getElementById("biarno-biztanleak-alde").innerHTML = herrialdeak["Biarno"].biztanleak.alde;
+
+        document.getElementById("lapurdi-biztanleak-aurka").innerHTML = herrialdeak["Lapurdi"].biztanleak.aurka;
+        document.getElementById("nafarroa-beherea-biztanleak-aurka").innerHTML = herrialdeak["Nafarroa Beherea"].biztanleak.aurka;
+        document.getElementById("zuberoa-biztanleak-aurka").innerHTML = herrialdeak["Zuberoa"].biztanleak.aurka;
+        document.getElementById("biarno-biztanleak-aurka").innerHTML = herrialdeak["Biarno"].biztanleak.aurka;
+    }
+
     var eskala = eskalatu();
 
     var aukerak = {
@@ -562,26 +584,8 @@
                 });
             });
 
-            document.getElementById("lapurdi-herriak-alde").innerHTML = herrialdeak["Lapurdi"].herriak.alde;
-            document.getElementById("nafarroa-beherea-herriak-alde").innerHTML = herrialdeak["Nafarroa Beherea"].herriak.alde;
-            document.getElementById("zuberoa-herriak-alde").innerHTML = herrialdeak["Zuberoa"].herriak.alde;
-            document.getElementById("biarno-herriak-alde").innerHTML = herrialdeak["Biarno"].herriak.alde;
-
-            document.getElementById("lapurdi-herriak-aurka").innerHTML = herrialdeak["Lapurdi"].herriak.aurka;
-            document.getElementById("nafarroa-beherea-herriak-aurka").innerHTML = herrialdeak["Nafarroa Beherea"].herriak.aurka;
-            document.getElementById("zuberoa-herriak-aurka").innerHTML = herrialdeak["Zuberoa"].herriak.aurka;
-            document.getElementById("biarno-herriak-aurka").innerHTML = herrialdeak["Biarno"].herriak.aurka;
-
-            document.getElementById("lapurdi-biztanleak-alde").innerHTML = herrialdeak["Lapurdi"].biztanleak.alde;
-            document.getElementById("nafarroa-beherea-biztanleak-alde").innerHTML = herrialdeak["Nafarroa Beherea"].biztanleak.alde;
-            document.getElementById("zuberoa-biztanleak-alde").innerHTML = herrialdeak["Zuberoa"].biztanleak.alde;
-            document.getElementById("biarno-biztanleak-alde").innerHTML = herrialdeak["Biarno"].biztanleak.alde;
-
-            document.getElementById("lapurdi-biztanleak-aurka").innerHTML = herrialdeak["Lapurdi"].biztanleak.aurka;
-            document.getElementById("nafarroa-beherea-biztanleak-aurka").innerHTML = herrialdeak["Nafarroa Beherea"].biztanleak.aurka;
-            document.getElementById("zuberoa-biztanleak-aurka").innerHTML = herrialdeak["Zuberoa"].biztanleak.aurka;
-            document.getElementById("biarno-biztanleak-aurka").innerHTML = herrialdeak["Biarno"].biztanleak.aurka;
-
+            bistaratuHerrialdeenTaulakoDatuak(herrialdeak);
+            
             // Udal guztiak.
             svg.selectAll(".unitatea")
                 .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena]).features)
