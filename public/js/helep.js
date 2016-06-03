@@ -305,13 +305,6 @@
                 });
             });
 
-            //console.log(biztanleak.guztira);
-            //console.log(herriak.guztira);
-            //console.log(JSON.stringify(herriak, null, 2));
-            //console.log(JSON.stringify(biztanleak, null, 2));
-            console.log(JSON.stringify(herri_elkargoak, null, 2));
-            //console.log(JSON.stringify(herrialdeak, null, 2));
-
             // Aurreko herri elkargoen datuen taula eguneratu.
             for (var herri_elkargoa in herri_elkargoak) {
 
@@ -658,7 +651,7 @@
                 .data(topojson.feature(geodatuak, geodatuak.objects[aukerak.json_izena_herri_elkargoak]).features)
                 .enter().append("path")
                 .attr("fill", function(d) {
-                    
+
                     // Herri elkargoko emaitzen arabera koloreztatuko dugu.
                     if (herri_elkargoak[d.properties.IZENA_EU].herriak.ez_daude_deituak > 0)  {
 
@@ -681,15 +674,15 @@
 
                 })
                 .attr("class", "unitatea")
-                .attr("id", function(d) { return "unitatea_" + d.properties.ud_kodea; })
-                .attr("d", kolore_maparen_bidea)
+                .attr("id", function(d) { return "unitatea_" + d.properties.H_ELK_KODE; })
+                .attr("d", herri_elkargoen_koropleta_maparen_bidea)
                 .on("mouseover", function(d) {
                     onMouseOver(d);
                 })
                 .on("mouseout", function(d) {
                     onMouseOut(d);
-                });
-                //.call(tip);
+                })
+                .call(tip);
 
             // Kanpo-mugak (a === b)
             herri_elkargoen_koropleta_mapa_svg.append("path")
@@ -698,10 +691,10 @@
                 .attr("class", "kanpo-mugak");
 
             // Unitateak aurreko planora ekarri.
-            /*herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea").each(function() {
+            herri_elkargoen_koropleta_mapa_svg.selectAll(".unitatea").each(function() {
                 var sel = d3.select(this);
                 sel.moveToFront();
-            });*/
+            });
 
             // Eskualdeen arteko mugak (a !== b)
             herri_elkargoen_koropleta_mapa_svg.append("path")
