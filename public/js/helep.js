@@ -122,7 +122,7 @@
                                         "<td class='aurka'>" + herri_elkargoak[d.properties.IZENA_EU].biztanleak.aurka + "</td>" +
                                     "</tr>" +
                                 "</tbody>" +
-                            "</table>"
+                            "</table>";
                 }
             }
             return katea;
@@ -132,7 +132,7 @@
         tip.show(d);
     }
 
-    function marraztuHerriElkargoenKoropletaMapa() {
+    function marraztuHerriElkargoenKoropletaMapa(herri_elkargoak) {
 
         // Datu geografikoak irakurri dagokion topoJSONetik.
         d3.json(aukerak.topoJSON_herri_elkargoak, function(error, geodatuak) {
@@ -198,7 +198,7 @@
         });
     }
 
-    function marraztuHerriElkargoenSinboloProportzionalenMapa() {
+    function marraztuHerriElkargoenSinboloProportzionalenMapa(herri_elkargoak) {
 
         // Datu geografikoak irakurri dagokion topoJSONetik.
         d3.json(aukerak.topoJSON_herri_elkargoak, function(error, geodatuak) {
@@ -569,7 +569,7 @@
                                     ez_daude_deituak: 0,
                                     guztira: 0
                                 }
-                            }
+                            };
                         }
 
                         if (!herrialdeak[d.herrialdea]) {
@@ -589,7 +589,7 @@
                                     ez_daude_deituak: 0,
                                     guztira: 0
                                 }
-                            }
+                            };
                         }
 
                         if (d.emaitza === "bai") {
@@ -643,6 +643,8 @@
 
             bistaratuHerrialdeenTaulakoDatuak(herrialdeak);
             bistaratuElkargoenTaulakoDatuak(herri_elkargoak);
+            marraztuHerriElkargoenKoropletaMapa(herri_elkargoak);
+            marraztuHerriElkargoenSinboloProportzionalenMapa(herri_elkargoak);
 
             // Udal guztiak.
             svg.selectAll(".unitatea")
@@ -933,9 +935,6 @@
                 }
             });
         });
-
-        marraztuHerriElkargoenKoropletaMapa();
-        marraztuHerriElkargoenSinboloProportzionalenMapa();
     });
 
 }());
