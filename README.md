@@ -5,6 +5,7 @@
 Bisualizazio hau software librea da eta iturburu-kodeak [GNU General Public License v3](http://www.gnu.org/licenses/gpl.html) (GPL) lizentzia du.
 
 Mapa marrazteko erabilitako topoJSON fitxategiak [Creative Commons Attribution-ShareAlike 4.0 International](http://creativecommons.org/licenses/by-sa/4.0/) lizentzia dauka eta [Gaindegia](http://www.gaindegia.eus/)ren [Euskalgeo](http://euskalgeo.net/) webguneko datu espazialetan oinarrituta dago.
+Lixoze-ren mugak OpenStreetMaps-en oinarrituta daude eta [Creative Commons Attribution-ShareAlike 2.0](http://creativecommons.org/licenses/by-sa/2.0/) lizentziari esker erabili ahal izan ditut.
 
 Emaitzen CSV fitxategiak ere [Creative Commons Attribution-ShareAlike 4.0 International](http://creativecommons.org/licenses/by-sa/4.0/) lizentzia dauka eta [Gaindegia](http://www.gaindegia.eus/)ren [datuak.net](http://datuak.net/) webguneko biztanleria datuetan oinarrituta dago.
 
