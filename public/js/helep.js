@@ -972,9 +972,14 @@
                     .enter()
                     .append("foreignObject")
                     .attr("x", 525)
-                    .attr("y", function(d, i){ return 310 + i * 25;})
+                    .attr("y", function(d, i) { return 310 + i * 25;})
                     .attr("width", 150)
-                    .attr("height", 25)
+                    .attr("height", function(d, i) {
+                        if (i === 2) {
+                            return 50;
+                        }
+                        return 25;
+                    })
                     .html(function(d, i) {
 
                         var legenda = "";
