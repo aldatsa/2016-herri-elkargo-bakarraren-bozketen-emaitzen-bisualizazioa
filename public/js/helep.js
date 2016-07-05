@@ -947,7 +947,7 @@
                 .enter()
                 .append("rect")
                 .attr("x", 500)
-                .attr("y", function(d, i){ return 310 + i * 25;})
+                .attr("y", function(d, i){ return 330 + i * 25;})
                 .attr("width", 18)
                 .attr("height", 18)
                 .attr("stroke-width", "1px")
@@ -972,7 +972,7 @@
                     .enter()
                     .append("foreignObject")
                     .attr("x", 525)
-                    .attr("y", function(d, i) { return 310 + i * 25;})
+                    .attr("y", function(d, i) { return 330 + i * 25;})
                     .attr("width", 150)
                     .attr("height", function(d, i) {
                         if (i === 2) {
