@@ -986,8 +986,30 @@
                         }
 
                         return legenda;
-                  });
-        });
+                    });
+                legend.selectAll("foreignObject")
+                    .data([0, 1, 2]) // 3 elementu daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
+                    .enter()
+                    .append("foreignObject")
+                    .attr("x", 525)
+                    .attr("y", function(d, i){ return 310 + i * 25;})
+                    .attr("width", 150)
+                    .attr("height", 25)
+                    .html(function(d, i) {
+
+                        var legenda = "";
+
+                        if (i === 0) {
+                            legenda = "Alde";
+                        } else if (i === 1) {
+                            legenda = "Aurka";
+                        } else if (i === 2) {
+                            legenda = "Ez dago bozketara deitua *";
+                        }
+
+                        return legenda;
+                    });
+                });
     });
 
 }());
