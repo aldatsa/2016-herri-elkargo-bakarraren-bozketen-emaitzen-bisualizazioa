@@ -934,6 +934,59 @@
                     }
                 }
             });
+
+            // add legend
+        	var legend = svg.append("g")
+        	  .attr("class", "legend")
+        	  .attr("height", 100)
+        	  .attr("width", 100);
+
+
+            legend.selectAll('rect')
+                .data([0, 1, 2]) // 3 kolore daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
+                .enter()
+                .append("rect")
+                .attr("x", 500)
+                .attr("y", function(d, i){ return 310 + i * 25;})
+                .attr("width", 18)
+                .attr("height", 18)
+                .attr("stroke-width", "1px")
+                .attr("stroke", "#ccc")
+                .style("fill", function(d, i) {
+
+                    var kolorea = aukerak.koloreak.lehenetsia;
+
+                    if (i === 0) {
+                        kolorea = aukerak.koloreak.bai;
+                    } else if (i === 1) {
+                        kolorea = aukerak.koloreak.ez;
+                    } else if (i === 2) {
+                        kolorea = "url('#pattern-stripe')";
+                    }
+
+                    return kolorea;
+                });
+
+                legend.selectAll('text')
+                    .data([0, 1, 2]) // 3 kolore daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
+                    .enter()
+                    .append("text")
+                    .attr("x", 525)
+                    .attr("y", function(d, i){ return 325 + i * 25;})
+            	    .text(function(d, i) {
+
+                        var legenda = "";
+
+                        if (i === 0) {
+                            legenda = "Alde";
+                        } else if (i === 1) {
+                            legenda = "Aurka";
+                        } else if (i === 2) {
+                            legenda = "Ez dago bozketara deitua *";
+                        }
+
+                        return legenda;
+                  });
         });
     });
 
