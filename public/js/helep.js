@@ -935,12 +935,11 @@
                 }
             });
 
-            // add legend
+            // Koropleta maparen legenda.
         	var legend = svg.append("g")
         	  .attr("class", "legend")
         	  .attr("height", 100)
         	  .attr("width", 100);
-
 
             legend.selectAll('rect')
                 .data([0, 1, 2]) // 3 kolore daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
@@ -967,55 +966,108 @@
                     return kolorea;
                 });
 
-                legend.selectAll('text')
-                    .data([0, 1, 2]) // 3 kolore daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
-                    .enter()
-                    .append("text")
-                    .attr("x", 485)
-                    .attr("y", function(d, i){ return 45 + i * 25;})
-                    .attr("font-size", "14px")
-                    .text(function(d, i) {
+            legend.selectAll('text')
+                .data([0, 1, 2]) // 3 kolore daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
+                .enter()
+                .append("text")
+                .attr("x", 485)
+                .attr("y", function(d, i){ return 45 + i * 25;})
+                .attr("font-size", "14px")
+                .text(function(d, i) {
 
-                        var legenda = "";
+                    var legenda = "";
 
-                        if (i === 0) {
-                            legenda = "Alde";
-                        } else if (i === 1) {
-                            legenda = "Aurka";
-                        } else if (i === 2) {
-                            legenda = "Ez dago bozketara deitua";
-                        }
+                    if (i === 0) {
+                        legenda = "Alde";
+                    } else if (i === 1) {
+                        legenda = "Aurka";
+                    } else if (i === 2) {
+                        legenda = "Ez dago bozketara deitua";
+                    }
 
-                        return legenda;
-                    });
+                    return legenda;
+                });
 
-                /*legend.selectAll("foreignObject")
-                    .data([0, 1, 2]) // 3 elementu daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
-                    .enter()
-                    .append("foreignObject")
-                    .attr("x", 525)
-                    .attr("y", function(d, i) { return 330 + i * 25;})
-                    .attr("width", 150)
-                    .attr("height", function(d, i) {
-                        if (i === 2) {
-                            return 50;
-                        }
-                        return 25;
-                    })
-                    .html(function(d, i) {
+            /*legend.selectAll("foreignObject")
+                .data([0, 1, 2]) // 3 elementu daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
+                .enter()
+                .append("foreignObject")
+                .attr("x", 525)
+                .attr("y", function(d, i) { return 330 + i * 25;})
+                .attr("width", 150)
+                .attr("height", function(d, i) {
+                    if (i === 2) {
+                        return 50;
+                    }
+                    return 25;
+                })
+                .html(function(d, i) {
 
-                        var legenda = "";
+                    var legenda = "";
 
-                        if (i === 0) {
-                            legenda = "Alde";
-                        } else if (i === 1) {
-                            legenda = "Aurka";
-                        } else if (i === 2) {
-                            legenda = "Ez dago bozketara deitua *";
-                        }
+                    if (i === 0) {
+                        legenda = "Alde";
+                    } else if (i === 1) {
+                        legenda = "Aurka";
+                    } else if (i === 2) {
+                        legenda = "Ez dago bozketara deitua *";
+                    }
 
-                        return legenda;
-                    });*/
+                    return legenda;
+                });*/
+
+            // Sinbolo proportzionalen maparen legenda.
+        	var sinbolo_proportzionalen_legenda = sinbolo_proportzionalen_svg.append("g")
+        	    .attr("class", "legend")
+        	    .attr("height", 100)
+        	    .attr("width", 100);
+
+            sinbolo_proportzionalen_legenda.selectAll('rect')
+                .data([0, 1, 2]) // 3 kolore daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
+                .enter()
+                .append("rect")
+                .attr("x", 460)
+                .attr("y", function(d, i){ return 30 + i * 25;})
+                .attr("width", 18)
+                .attr("height", 18)
+                .attr("stroke-width", "1px")
+                .attr("stroke", "#ccc")
+                .style("fill", function(d, i) {
+
+                    var kolorea = aukerak.koloreak.lehenetsia;
+
+                    if (i === 0) {
+                        kolorea = aukerak.koloreak.bai;
+                    } else if (i === 1) {
+                        kolorea = aukerak.koloreak.ez;
+                    } else if (i === 2) {
+                        kolorea = "url('#pattern-stripe')";
+                    }
+
+                    return kolorea;
+                });
+
+            sinbolo_proportzionalen_legenda.selectAll('text')
+                .data([0, 1, 2]) // 3 kolore daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
+                .enter()
+                .append("text")
+                .attr("x", 485)
+                .attr("y", function(d, i){ return 45 + i * 25;})
+                .attr("font-size", "14px")
+                .text(function(d, i) {
+
+                    var legenda = "";
+
+                    if (i === 0) {
+                        legenda = "Alde";
+                    } else if (i === 1) {
+                        legenda = "Aurka";
+                    } else if (i === 2) {
+                        legenda = "Ez dago bozketara deitua";
+                    }
+
+                    return legenda;
+                });
         });
     });
 }());
