@@ -377,11 +377,11 @@
     var aukerak = {
         kolore_mapa: {
             zabalera: 680,
-            altuera: 865,
+            altuera: 565,
             proiekzioa: {
                 erdia: {
                     lat: -1.22,
-                    lng: 43.40
+                    lng: 43.20
                 },
                 eskala: 32000
             }
@@ -946,8 +946,8 @@
                 .data([0, 1, 2]) // 3 kolore daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
                 .enter()
                 .append("rect")
-                .attr("x", 500)
-                .attr("y", function(d, i){ return 330 + i * 25;})
+                .attr("x", 460)
+                .attr("y", function(d, i){ return 30 + i * 25;})
                 .attr("width", 18)
                 .attr("height", 18)
                 .attr("stroke-width", "1px")
@@ -971,8 +971,9 @@
                     .data([0, 1, 2]) // 3 kolore daude legendan, baina aukerak.koloreak objektu bat da, ez array bat.
                     .enter()
                     .append("text")
-                    .attr("x", 525)
-                    .attr("y", function(d, i){ return 345 + i * 25;})
+                    .attr("x", 485)
+                    .attr("y", function(d, i){ return 45 + i * 25;})
+                    .attr("font-size", "14px")
                     .text(function(d, i) {
 
                         var legenda = "";
@@ -982,7 +983,7 @@
                         } else if (i === 1) {
                             legenda = "Aurka";
                         } else if (i === 2) {
-                            legenda = "Ez dago bozketara deitua *";
+                            legenda = "Ez dago bozketara deitua";
                         }
 
                         return legenda;
